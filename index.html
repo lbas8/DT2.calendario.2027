@@ -204,7 +204,7 @@
                 </div>
                 <h3 class="text-xl font-bold text-white mb-2">"Il Mese Più Simpatico"</h3>
                 <p class="text-slate-300 text-sm mb-4">
-                  Chiunque acquisterà almeno una copia del calendario avrà diritto di voto per stilare il proprio podio (1°, 2° e 3° posto).
+                  All'invio del modulo ti verrà generato un **Codice Votante** e un **PIN a 4 cifre** univoco per votare il tuo podio non appena apriranno le votazioni.
                 </p>
 
                 <div class="bg-slate-900/80 border border-slate-700 p-4 rounded-xl mb-4">
@@ -271,14 +271,51 @@
         </div>
       </section>
 
-      <!-- FORM REGISTRAZIONE -->
+      <!-- FORM REGISTRAZIONE / RICEVUTA PASS -->
       <section id="partecipa" class="py-16 bg-slate-950">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
+          
+          <!-- RICEVUTA CODICE PERSONALE (DOPO INVIO) -->
+          <div x-show="lastSubmission" x-cloak class="bg-slate-900 border-2 border-emerald-500/50 rounded-3xl p-6 sm:p-10 shadow-2xl text-center relative overflow-hidden">
+            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-black text-white mb-2">Adesione Registrata!</h2>
+            <p class="text-slate-300 text-sm mb-6">Ecco il tuo **Pass Personale per il Contest**. Salvalo o fai uno screenshot, ti servirà per votare il mese più simpatico!</p>
+
+            <!-- CARD PASS PERSONALE -->
+            <div class="bg-gradient-to-br from-slate-800 to-brand-900/60 border border-brand-500/40 rounded-2xl p-6 max-w-md mx-auto shadow-inner text-left mb-6 relative">
+              <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-700">
+                <div>
+                  <span class="text-[10px] uppercase font-extrabold text-brand-400 tracking-wider">Pass Votante Ufficiale</span>
+                  <h4 class="text-base font-bold text-white" x-text="lastSubmission?.firstName + ' ' + lastSubmission?.lastName"></h4>
+                </div>
+                <span class="text-xs bg-slate-700 text-slate-200 px-2 py-1 rounded font-medium" x-text="lastSubmission?.office"></span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4 text-center">
+                <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700">
+                  <span class="block text-[10px] text-slate-400 uppercase font-bold">Codice Votante</span>
+                  <span class="text-xl font-black text-brand-400 tracking-wider" x-text="lastSubmission?.voterId"></span>
+                </div>
+                <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700">
+                  <span class="block text-[10px] text-slate-400 uppercase font-bold">PIN Segreto (4 cifre)</span>
+                  <span class="text-xl font-black text-accent-400 tracking-widest" x-text="lastSubmission?.voterPin"></span>
+                </div>
+              </div>
+            </div>
+
+            <button @click="lastSubmission = null" class="text-xs text-slate-400 hover:text-white underline">
+              Compila un'altra adesione
+            </button>
+          </div>
+
+          <!-- FORM STANDARD -->
+          <div x-show="!lastSubmission" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
             <div class="mb-8 text-center">
               <span class="text-accent-500 font-bold text-xs uppercase tracking-wider">Modulo Ufficiale</span>
               <h2 class="text-2xl sm:text-3xl font-black text-white mt-1">Aderisci all'Iniziativa 2027</h2>
-              <p class="text-slate-400 text-sm mt-1">Compila il modulo per prenotare la tua copia e confermare la tua presenza negli scatti del tuo ufficio.</p>
+              <p class="text-slate-400 text-sm mt-1">Compila il modulo per prenotare la tua copia e generare il tuo codice univoco per il contest.</p>
             </div>
 
             <form @submit.prevent="submitForm()" class="space-y-6">
@@ -355,7 +392,7 @@
                       class="w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition flex items-center justify-center space-x-2">
                 <i class="fa-solid fa-paper-plane" x-show="!loading"></i>
                 <i class="fa-solid fa-spinner fa-spin" x-show="loading" x-cloak></i>
-                <span x-text="loading ? 'Invio registrazione in corso...' : 'Invia Adesione'"></span>
+                <span x-text="loading ? 'Generazione codice in corso...' : 'Invia Adesione e Ricevi Codice Voto'"></span>
               </button>
 
             </form>
@@ -403,7 +440,7 @@
         </div>
 
         <div class="bg-slate-800/60 border border-slate-700 p-4 rounded-xl text-xs text-slate-400 inline-block">
-          💡 <strong>Promemoria:</strong> Potranno votare solo coloro che avranno prenotato almeno 1 copia del calendario!
+          💡 <strong>Promemoria:</strong> Per votare utilizzerai il tuo **Codice Votante** e il **PIN a 4 cifre** generati al momento dell'adesione!
         </div>
 
       </div>
@@ -414,8 +451,8 @@
       
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
         <div>
-          <h1 class="text-3xl font-extrabold text-white">Dashboard Amministrativa & Contest</h1>
-          <p class="text-slate-400 text-sm">Monitoraggio in tempo reale delle adesioni, archivio prenotazioni e statistiche per ufficio.</p>
+          <h1 class="text-3xl font-extrabold text-white">Dashboard Amministrativa & Credenziali Voto</h1>
+          <p class="text-slate-400 text-sm">Monitoraggio adesioni, archivio prenotazioni e codici/PIN personali dei partecipanti.</p>
         </div>
 
         <div class="flex items-center space-x-3">
@@ -502,7 +539,7 @@
       <!-- Filtri Tabella -->
       <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
-          <input type="text" x-model="adminSearch" placeholder="Cerca per nome, cognome o email..." 
+          <input type="text" x-model="adminSearch" placeholder="Cerca per nome, cognome, email o ID Votante..." 
                  class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500">
         </div>
         <div>
@@ -523,13 +560,13 @@
         </div>
       </div>
 
-      <!-- TABELLA DATI ARCHIVIO -->
+      <!-- TABELLA DATI ARCHIVIO CON CREDENZIALI VOTO -->
       <div class="bg-slate-800/80 border border-slate-700 rounded-2xl overflow-hidden shadow-xl">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm text-slate-300">
             <thead class="bg-slate-900/90 text-xs text-slate-400 uppercase tracking-wider border-b border-slate-700">
               <tr>
-                <th class="py-3.5 px-4">Data</th>
+                <th class="py-3.5 px-4">Codice Voto / PIN</th>
                 <th class="py-3.5 px-4">Nome e Cognome</th>
                 <th class="py-3.5 px-4">Email</th>
                 <th class="py-3.5 px-4">Ufficio</th>
@@ -542,7 +579,10 @@
             <tbody class="divide-y divide-slate-700/60">
               <template x-for="(sub, index) in filteredSubmissions" :key="index">
                 <tr class="hover:bg-slate-700/30 transition">
-                  <td class="py-3 px-4 whitespace-nowrap text-xs text-slate-400" x-text="sub.date"></td>
+                  <td class="py-3 px-4 whitespace-nowrap">
+                    <span class="block font-mono font-bold text-brand-400 text-xs" x-text="sub.voterId"></span>
+                    <span class="text-[11px] font-mono text-accent-400" x-text="'PIN: ' + sub.voterPin"></span>
+                  </td>
                   <td class="py-3 px-4 font-semibold text-white whitespace-nowrap" x-text="sub.firstName + ' ' + sub.lastName"></td>
                   <td class="py-3 px-4 text-xs text-slate-300" x-text="sub.email"></td>
                   <td class="py-3 px-4 whitespace-nowrap">
@@ -610,6 +650,7 @@
         adminSearch: '',
         adminFilterOffice: '',
         adminFilterType: '',
+        lastSubmission: null,
         
         departments: [
           'Ambiente',
@@ -683,16 +724,23 @@
           this.loading = true;
 
           setTimeout(() => {
+            // Genera codice votante (es: DT2-4829) e PIN a 4 cifre (es: 3942)
+            const voterId = 'DT2-' + Math.floor(1000 + Math.random() * 9000);
+            const voterPin = Math.floor(1000 + Math.random() * 9000).toString();
+
             const newEntry = {
               ...this.form,
+              voterId: voterId,
+              voterPin: voterPin,
               date: new Date().toLocaleDateString('it-IT') + ' ' + new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })
             };
 
             this.submissions.unshift(newEntry);
             localStorage.setItem('calendar_submissions_2027', JSON.stringify(this.submissions));
 
+            this.lastSubmission = newEntry;
             this.loading = false;
-            this.showNotification('Adesione inviata con successo! Grazie per la partecipazione.');
+            this.showNotification('Adesione inviata! Codice Voto generato.');
 
             // Reset Form
             this.form = {
@@ -732,7 +780,7 @@
 
         get filteredSubmissions() {
           return this.submissions.filter(sub => {
-            const matchesSearch = (sub.firstName + ' ' + sub.lastName + ' ' + sub.email).toLowerCase().includes(this.adminSearch.toLowerCase());
+            const matchesSearch = (sub.firstName + ' ' + sub.lastName + ' ' + sub.email + ' ' + (sub.voterId || '')).toLowerCase().includes(this.adminSearch.toLowerCase());
             const matchesOffice = !this.adminFilterOffice || sub.office === this.adminFilterOffice;
             const matchesType = !this.adminFilterType || sub.participationType === this.adminFilterType;
             return matchesSearch && matchesOffice && matchesType;
@@ -761,10 +809,12 @@
             return;
           }
 
-          let csvContent = "data:text/csv;charset=utf-8,Data,Nome,Cognome,Email,Ufficio,Partecipazione,Copie,Note\n";
+          let csvContent = "data:text/csv;charset=utf-8,Data,Codice_Voto,PIN,Nome,Cognome,Email,Ufficio,Partecipazione,Copie,Note\n";
           this.submissions.forEach(row => {
             const line = [
               `"${row.date}"`,
+              `"${row.voterId || ''}"`,
+              `"${row.voterPin || ''}"`,
               `"${row.firstName}"`,
               `"${row.lastName}"`,
               `"${row.email}"`,
@@ -779,7 +829,7 @@
           const encodedUri = encodeURI(csvContent);
           const link = document.createElement("a");
           link.setAttribute("href", encodedUri);
-          link.setAttribute("download", "Adesioni_Calendario_2027.csv");
+          link.setAttribute("download", "Adesioni_E_Credenziali_Calendario_2027.csv");
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);

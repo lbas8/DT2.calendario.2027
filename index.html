@@ -361,7 +361,7 @@
             </button>
           </div>
 
-          <!-- FORM STANDARD -->
+          <!-- FORM STANDARD (SENZA EMAIL) -->
           <div x-show="!lastSubmission" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
             <div class="mb-8 text-center">
               <span class="text-amber-400 font-black text-xs uppercase tracking-wider">Modulo Ufficiale</span>
@@ -385,23 +385,16 @@
                 </div>
               </div>
 
-              <!-- Email Aziendale e Ufficio -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Email Aziendale *</label>
-                  <input type="email" x-model="form.email" required placeholder="mario.rossi@azienda.it"
-                         class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500">
-                </div>
-                <div>
-                  <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Ufficio / Reparto *</label>
-                  <select x-model="form.office" required
-                          class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500">
-                    <option value="" disabled selected>Seleziona Ufficio</option>
-                    <template x-for="dept in departments" :key="dept">
-                      <option :value="dept" x-text="dept"></option>
-                    </template>
-                  </select>
-                </div>
+              <!-- Ufficio / Reparto (A TUTTO LARGHEZZA) -->
+              <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Ufficio / Reparto *</label>
+                <select x-model="form.office" required
+                        class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500">
+                  <option value="" disabled selected>Seleziona Ufficio</option>
+                  <template x-for="dept in departments" :key="dept">
+                    <option :value="dept" x-text="dept"></option>
+                  </template>
+                </select>
               </div>
 
               <!-- Tipo di Partecipazione -->
@@ -497,7 +490,7 @@
       </div>
     </div>
 
-    <!-- DASHBOARD ADMIN (PROTETTA DA PASSWORD) -->
+    <!-- DASHBOARD ADMIN -->
     <div x-show="activeTab === 'admin'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
@@ -592,9 +585,9 @@
       </div>
 
       <!-- Filtri Tabella -->
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <input type="text" x-model="adminSearch" placeholder="Cerca per nome, cognome, email o ID..." 
+          <input type="text" x-model="adminSearch" placeholder="Cerca per nome, cognome o ID..." 
                  class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500">
         </div>
         <div>
@@ -605,17 +598,9 @@
             </template>
           </select>
         </div>
-        <div>
-          <select x-model="adminFilterType" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500">
-            <option value="">Tutti i Tipi di Partecipazione</option>
-            <option value="Entrambi">Foto & Prenotazione Copia</option>
-            <option value="Solo Foto">Solo Scatto Fotografico</option>
-            <option value="Solo Acquisto">Solo Acquisto Copia</option>
-          </select>
-        </div>
       </div>
 
-      <!-- TABELLA DATI ARCHIVIO CON CREDENZIALI VOTO -->
+      <!-- TABELLA DATI ARCHIVIO (SENZA COLONNA EMAIL) -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm text-slate-300">
@@ -623,7 +608,6 @@
               <tr>
                 <th class="py-3.5 px-4">Codice Voto / PIN</th>
                 <th class="py-3.5 px-4">Nome e Cognome</th>
-                <th class="py-3.5 px-4">Email</th>
                 <th class="py-3.5 px-4">Ufficio</th>
                 <th class="py-3.5 px-4">Partecipazione</th>
                 <th class="py-3.5 px-4">Copie</th>
@@ -639,7 +623,6 @@
                     <span class="text-[11px] font-mono text-amber-400" x-text="'PIN: ' + sub.voterPin"></span>
                   </td>
                   <td class="py-3 px-4 font-semibold text-white whitespace-nowrap" x-text="sub.firstName + ' ' + sub.lastName"></td>
-                  <td class="py-3 px-4 text-xs text-slate-300" x-text="sub.email"></td>
                   <td class="py-3 px-4 whitespace-nowrap">
                     <span class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded text-xs font-medium" x-text="sub.office"></span>
                   </td>
@@ -660,7 +643,7 @@
                 </tr>
               </template>
               <tr x-show="filteredSubmissions.length === 0">
-                <td colspan="8" class="py-12 text-center text-slate-500">
+                <td colspan="7" class="py-12 text-center text-slate-500">
                   <i class="fa-solid fa-inbox text-3xl mb-2 block"></i>
                   Nessuna adesione trovata con i filtri selezionati.
                 </td>
@@ -705,7 +688,7 @@
         showPasswordModal: false,
         isAdminAuthenticated: false,
         enteredPassword: '',
-        adminPassword: 'ungiornoinmenoallastella', // <-- PUOI CAMBIARE QUI LA PASSWORD ADMIN
+        adminPassword: 'admin2027',
         adminSearch: '',
         adminFilterOffice: '',
         adminFilterType: '',
@@ -798,7 +781,6 @@
         form: {
           firstName: '',
           lastName: '',
-          email: '',
           office: '',
           participationType: 'Entrambi',
           copies: 1,
@@ -876,7 +858,6 @@
             this.form = {
               firstName: '',
               lastName: '',
-              email: '',
               office: '',
               participationType: 'Entrambi',
               copies: 1,
@@ -910,10 +891,9 @@
 
         get filteredSubmissions() {
           return this.submissions.filter(sub => {
-            const matchesSearch = (sub.firstName + ' ' + sub.lastName + ' ' + sub.email + ' ' + (sub.voterId || '')).toLowerCase().includes(this.adminSearch.toLowerCase());
+            const matchesSearch = (sub.firstName + ' ' + sub.lastName + ' ' + (sub.voterId || '')).toLowerCase().includes(this.adminSearch.toLowerCase());
             const matchesOffice = !this.adminFilterOffice || sub.office === this.adminFilterOffice;
-            const matchesType = !this.adminFilterType || sub.participationType === this.adminFilterType;
-            return matchesSearch && matchesOffice && matchesType;
+            return matchesSearch && matchesOffice;
           });
         },
 
@@ -939,7 +919,7 @@
             return;
           }
 
-          let csvContent = "data:text/csv;charset=utf-8,Data,Codice_Voto,PIN,Nome,Cognome,Email,Ufficio,Partecipazione,Copie,Note\n";
+          let csvContent = "data:text/csv;charset=utf-8,Data,Codice_Voto,PIN,Nome,Cognome,Ufficio,Partecipazione,Copie,Note\n";
           this.submissions.forEach(row => {
             const line = [
               `"${row.date}"`,
@@ -947,7 +927,6 @@
               `"${row.voterPin || ''}"`,
               `"${row.firstName}"`,
               `"${row.lastName}"`,
-              `"${row.email}"`,
               `"${row.office}"`,
               `"${row.participationType}"`,
               `"${row.copies || 0}"`,

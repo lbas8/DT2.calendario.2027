@@ -75,7 +75,7 @@
                 :class="activeTab === 'user' ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg' : 'text-slate-400 hover:text-slate-200'"
                 class="px-3 py-1.5 rounded-lg text-xs font-extrabold transition flex items-center space-x-1.5">
           <i class="fa-solid fa-user"></i>
-          <span>Dipendenti</span>
+          <span>Partecipanti</span>
         </button>
         <button @click="activeTab = 'voting'" 
                 :class="activeTab === 'voting' ? 'bg-gradient-to-r from-amber-500 to-rose-500 text-slate-950 shadow-lg' : 'text-slate-400 hover:text-slate-200'"
@@ -155,8 +155,8 @@
             <!-- Stats Bar -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-800">
               <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
-                <span class="block text-xl font-black text-white">12 Mesi + Cover</span>
-                <span class="text-xs text-slate-400">Pianificazione Uffici</span>
+                <span class="block text-xl font-black text-white">12 Mesi + Copertina</span>
+                <span class="text-xs text-slate-400">Tipologia di Calendario</span>
               </div>
               <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
                 <span class="block text-xl font-black text-amber-400">5 €</span>
@@ -164,7 +164,7 @@
               </div>
               <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
                 <span class="block text-xl font-black text-cyan-400">30 Nov - 3 Dic</span>
-                <span class="text-xs text-slate-400">Foto Campo Base</span>
+                <span class="text-xs text-slate-400">Scatto delle Fotografie al Campo Base di Arquata Scrivia</span>
               </div>
               <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
                 <span class="block text-xl font-black text-emerald-400" x-text="submissions.length">0</span>
@@ -182,7 +182,7 @@
             <span class="px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-full text-xs font-black uppercase tracking-wider">
               Programma Scatti Fotografici
             </span>
-            <h2 class="text-3xl sm:text-4xl font-black text-white mt-3">Uffici, Soggetti & Mesi 2027</h2>
+            <h2 class="text-3xl sm:text-4xl font-black text-white mt-3">Uffici, Soggetti & Mesi Assegnati 2027</h2>
             <p class="text-slate-400 mt-2">Trova il tuo ufficio, scopri il soggetto fotografico ed annota la data per la posa al Campo Base di Arquata Scrivia!</p>
           </div>
 
@@ -245,10 +245,10 @@
               <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-lg">
                 <div class="flex items-center space-x-3 mb-3">
                   <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">1</div>
-                  <h3 class="text-lg font-bold text-white">🏢 Gli Uffici & I Soggetti Mensili</h3>
+                  <h3 class="text-lg font-bold text-white">🏢 Gli Uffici & i Soggetti Mensili</h3>
                 </div>
                 <p class="text-slate-300 text-sm leading-relaxed">
-                  Ogni ufficio è abbinato a un mese e a un soggetto specifico. Il vostro team rappresenterà quel tema ed è chiamato a interpretarlo con creatività, spirito di squadra e autoironia!
+                  Ogni Ufficio è abbinato a un mese e a un soggetto specifico. Il vostro team rappresenterà quel tema ed è chiamato a interpretarlo con creatività, spirito di squadra e autoironia!
                 </p>
               </div>
 
@@ -586,7 +586,7 @@
         <div class="bg-gradient-to-br from-slate-900 to-amber-950/40 border border-amber-500/40 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">🏆 Leaderboard Contest</span>
+              <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">🏆 Leaderboard di Iscrizione</span>
               <i class="fa-solid fa-trophy text-amber-400 text-xl"></i>
             </div>
             <h3 class="text-lg font-bold text-white mb-1">Stato Attuale Uffici</h3>
@@ -773,7 +773,7 @@
           { id: 10, name: 'Ottobre', subject: 'Halloween/Castagne', office: 'Contabilità', date: 'mer 2 dic 2026', icon: 'fa-solid fa-ghost', bgClass: 'bg-gradient-to-br from-rose-950/80 via-slate-900 to-slate-900 border-rose-500/40', glowClass: 'bg-rose-500', iconBadge: 'bg-rose-500/20 text-rose-400 border border-rose-500/30' },
           { id: 11, name: 'Novembre', subject: 'Primi Freddi', office: 'Qualità', date: 'mer 2 dic 2026', icon: 'fa-solid fa-mug-hot', bgClass: 'bg-gradient-to-br from-blue-950/80 via-slate-900 to-slate-900 border-blue-500/40', glowClass: 'bg-blue-500', iconBadge: 'bg-blue-500/20 text-blue-400 border border-blue-500/30' },
           { id: 12, name: 'Dicembre', subject: 'Cenone / Regali / Presepe', office: 'Cost Control/Planner/Direzione', date: 'mer 2 dic 2026', icon: 'fa-solid fa-gift', bgClass: 'bg-gradient-to-br from-red-950/80 via-slate-900 to-slate-900 border-red-500/40', glowClass: 'bg-red-500', iconBadge: 'bg-red-500/20 text-red-400 border border-red-500/30' },
-          { id: 13, name: 'Speciale', subject: "Libero / Ognuno del proprio ufficio", office: 'Copertina (DT2)', date: 'gio 3 dic 2026', icon: 'fa-solid fa-star', bgClass: 'bg-gradient-to-br from-amber-900/80 via-slate-900 to-slate-900 border-amber-400/60 sm:col-span-2 lg:col-span-3 xl:col-span-4', glowClass: 'bg-amber-400', iconBadge: 'bg-amber-400/20 text-amber-300 border border-amber-400/30' }
+          { id: 13, name: 'Speciale', subject: "Libero / Tema Ufficio", office: 'Copertina (DT2)', date: 'gio 3 dic 2026', icon: 'fa-solid fa-star', bgClass: 'bg-gradient-to-br from-amber-900/80 via-slate-900 to-slate-900 border-amber-400/60 sm:col-span-2 lg:col-span-3 xl:col-span-4', glowClass: 'bg-amber-400', iconBadge: 'bg-amber-400/20 text-amber-300 border border-amber-400/30' }
         ],
 
         form: {

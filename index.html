@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Aziendale 2027 - Portale Adesioni</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        corporate: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            800: '#0c4a6e',
+                            900: '#0f172a',
+                        },
+                        accent: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- NAVIGATION HEADER -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand / Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('user')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-corporate-600 to-corporate-800 flex items-center justify-center text-white shadow-md shadow-corporate-500/20">
+                    <i class="fa-solid me-0 fa-calendar-days text-xl"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-lg text-slate-900 tracking-tight block leading-tight">Calendario 2027</span>
+                    <span class="text-xs text-corporate-600 font-medium">Iniziativa Aziendale</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-slate-600 hover:text-corporate-600 font-medium text-sm transition">Progetto</a>
+                <a href="#mesi" class="text-slate-600 hover:text-corporate-600 font-medium text-sm transition">Temi Mensili</a>
+                <a href="#adesione" class="text-slate-600 hover:text-corporate-600 font-medium text-sm transition">Partecipa</a>
+                <a href="https://github.com" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition">
+                    <i class="fa-brands fa-github"></i> GitHub Repository
+                </a>
+            </nav>
+
+            <!-- Mode Switcher (User / Admin) -->
+            <div class="flex items-center space-x-3">
+                <button id="btn-tab-user" onclick="switchTab('user')" class="px-4 py-2 text-sm font-medium rounded-lg bg-corporate-50 text-corporate-700 border border-corporate-200 shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-user text-xs"></i> Portale Dipendenti
+                </button>
+                <button id="btn-tab-admin" onclick="switchTab('admin')" class="px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:bg-slate-100 transition flex items-center gap-2">
+                    <i class="fa-solid fa-chart-pie text-xs"></i> Dashboard Admin <span id="badge-count" class="ml-1 px-1.5 py-0.5 text-xs bg-corporate-600 text-white rounded-full">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3"></div>
+
+    <!-- MAIN CONTENT VIEW: USER PORTAL -->
+    <main id="user-view" class="flex-grow">
+        
+        <!-- HERO SECTION -->
+        <section id="about" class="relative overflow-hidden bg-gradient-to-b from-corporate-900 via-corporate-800 to-slate-900 text-white py-16 lg:py-24">
+            <!-- Decorative background pattern -->
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-corporate-500/20 text-corporate-200 border border-corporate-400/30">
+                            <i class="fa-solid fa-sparkles text-accent-500"></i> Edizione Speciale 2027
+                        </span>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                            Scrivi insieme a noi il <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-amber-300">Nuovo Anno</span>
+                        </h1>
+                        <p class="text-slate-300 text-lg sm:text-xl max-w-2xl font-light leading-relaxed">
+                            Partecipa al Calendario Aziendale 2027! Puoi richiedere la tua copia cartacea d'autore oppure candidare i tuoi scatti fotografici ed idee per rappresentare uno dei mesi dell'anno.
+                        </p>
+                        
+                        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <a href="#adesione" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-accent-500 to-amber-600 text-slate-950 font-bold hover:shadow-lg hover:shadow-amber-500/25 hover:scale-[1.02] active:scale-[0.98] transition text-center">
+                                Compila il Form di Adesione <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </a>
+                            <a href="#mesi" class="w-full sm:w-auto px-6 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium backdrop-blur-sm border border-white/10 transition text-center">
+                                Scopri i Temi 2027
+                            </a>
+                        </div>
+
+                        <!-- Info Box for Hosting on GitHub Pages -->
+                        <div class="mt-4 p-3 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 flex items-center gap-3">
+                            <i class="fa-brands fa-github text-lg text-white"></i>
+                            <span>Pronto per l'hosting su <strong>GitHub Pages</strong>. Tutte le registrazioni vengono sincronizzate in Cloud Firestore in tempo reale!</span>
+                        </div>
+
+                        <!-- Stats Highlights -->
+                        <div class="pt-8 border-t border-white/10 grid grid-cols-3 gap-4 text-center lg:text-left">
+                            <div>
+                                <p class="text-2xl font-bold text-white">12</p>
+                                <p class="text-xs text-slate-400">Temi Mensili</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-white">100%</p>
+                                <p class="text-xs text-slate-400">Carta Riciclata</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-accent-500" id="stat-total-submissions">0</p>
+                                <p class="text-xs text-slate-400">Adesioni Inviate</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Visual Card -->
+                    <div class="lg:col-span-5">
+                        <div class="relative mx-auto max-w-md bg-gradient-to-br from-white/10 to-white/5 p-6 rounded-3xl backdrop-blur-xl border border-white/20 shadow-2xl">
+                            <div class="bg-slate-900/80 rounded-2xl p-6 border border-white/10 text-slate-200 space-y-4">
+                                <div class="flex items-center justify-between pb-3 border-b border-slate-700">
+                                    <span class="text-xs font-mono text-slate-400">CALENDARIO AZIENDALE 2027</span>
+                                    <span class="px-2 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-400 rounded-md font-semibold">APERTO</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-8 h-8 rounded-lg bg-corporate-500/20 flex items-center justify-center text-corporate-400 shrink-0 mt-1">
+                                            <i class="fa-solid fa-camera"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-sm text-white">Contributo Fotografico</h4>
+                                            <p class="text-xs text-slate-400">Invia i tuoi scatti migliori legati ai valori aziendali.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 shrink-0 mt-1">
+                                            <i class="fa-solid fa-box-archive"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-sm text-white">Prenotazione Copie</h4>
+                                            <p class="text-xs text-slate-400">Assicurati una copia fisica da tavolo o da parete per il 2027.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pt-2">
+                                    <div class="text-xs text-slate-400 flex justify-between mb-1">
+                                        <span>Scadenza Invio Foto:</span>
+                                        <span class="text-amber-400 font-semibold">15 Novembre 2026</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- MONTHS THEMATIC OVERVIEW GRID -->
+        <section id="mesi" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Panoramica Mesi & Temi 2027</h2>
+                <p class="mt-3 text-slate-600">Ogni mese dell'anno 2027 racconterà un aspetto distintivo della nostra realtà aziendale. Scegli il mese che rispecchia la tua idea!</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="months-container">
+                <!-- Dynamically Generated via JS -->
+            </div>
+        </section>
+
+        <!-- FORM DI ADESIONE SECTION -->
+        <section id="adesione" class="py-16 bg-slate-100 border-t border-slate-200">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+                    <div class="bg-gradient-to-r from-corporate-700 to-corporate-900 p-8 text-white">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-accent-500 font-bold text-lg">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </span>
+                            <div>
+                                <h3 class="text-2xl font-bold">Form di Adesione Iniziativa</h3>
+                                <p class="text-slate-300 text-sm">Compila i campi sottostanti per confermare la tua richiesta o candidatura.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="form-adesione" onsubmit="handleFormSubmit(event)" class="p-8 space-y-6">
+                        
+                        <!-- Personal Info Group -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="fullname" class="block text-sm font-semibold text-slate-700 mb-2">Nome e Cognome *</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-user text-sm"></i>
+                                    </div>
+                                    <input type="text" id="fullname" required placeholder="Es. Marco Rossi" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-corporate-500 focus:border-corporate-500 outline-none transition text-sm">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">Email Aziendale *</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-envelope text-sm"></i>
+                                    </div>
+                                    <input type="email" id="email" required placeholder="m.rossi@azienda.it" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-corporate-500 focus:border-corporate-500 outline-none transition text-sm">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="department" class="block text-sm font-semibold text-slate-700 mb-2">Reparto / Sede Aziendale *</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-building text-sm"></i>
+                                    </div>
+                                    <select id="department" required class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-corporate-500 focus:border-corporate-500 outline-none transition text-sm bg-white">
+                                        <option value="" disabled selected>Seleziona Reparto</option>
+                                        <option value="IT & Digital Innovation">IT & Digital Innovation</option>
+                                        <option value="Risorse Umane (HR)">Risorse Umane (HR)</option>
+                                        <option value="Marketing & Comunicazione">Marketing & Comunicazione</option>
+                                        <option value="Commerciale & Vendite">Commerciale & Vendite</option>
+                                        <option value="Amministrazione & Finanza">Amministrazione & Finanza</option>
+                                        <option value="Produzione & Logistica">Produzione & Logistica</option>
+                                        <option value="R&D / Ricerca">R&D / Ricerca</option>
+                                        <option value="Sede Estera / Filiale">Sede Estera / Filiale</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="participation-type" class="block text-sm font-semibold text-slate-700 mb-2">Tipo di Adesione *</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <i class="fa-solid fa-list-check text-sm"></i>
+                                    </div>
+                                    <select id="participation-type" onchange="togglePhotoSection()" required class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-corporate-500 focus:border-corporate-500 outline-none transition text-sm bg-white">
+                                        <option value="copia">Desidero solo ricevere una copia cartacea</option>
+                                        <option value="foto">Voglio candidare una foto/idea per un mese</option>
+                                        <option value="entrambe" selected>Entrambe (Prenotazione copia + Candidatura foto)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PHOTO SUBMISSION OPTIONAL SECTION -->
+                        <div id="photo-submission-section" class="p-6 bg-slate-50 border border-slate-200 rounded-2xl space-y-4">
+                            <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-camera text-corporate-600"></i> Dettagli Candidatura Foto / Mese
+                            </h4>
+                            
+                            <div>
+                                <label for="month-preference" class="block text-xs font-semibold text-slate-600 mb-1">Mese di Preferenza</label>
+                                <select id="month-preference" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-sm bg-white outline-none focus:ring-2 focus:ring-corporate-500">
+                                    <option value="Nessuna preferenza">Nessuna preferenza specifica</option>
+                                    <option value="Gennaio">Gennaio - Inizio & Visione</option>
+                                    <option value="Febbraio">Febbraio - Sostenibilità & Green</option>
+                                    <option value="Marzo">Marzo - Innovazione Digitale</option>
+                                    <option value="Aprile">Aprile - Sicurezza sul Lavoro</option>
+                                    <option value="Maggio">Maggio - Benessere & Welfare</option>
+                                    <option value="Giugno">Giugno - Teamwork & Collaborazione</option>
+                                    <option value="Luglio">Luglio - Diversity & Inclusion</option>
+                                    <option value="Agosto">Agosto - Work-Life Balance</option>
+                                    <option value="Settembre">Settembre - Formazione & Crescita</option>
+                                    <option value="Ottobre">Ottobre - Qualità & Eccellenza</option>
+                                    <option value="Novembre">Novembre - Comunità & Territorio</option>
+                                    <option value="Dicembre">Dicembre - Traguardi & Festa</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="photo-notes" class="block text-xs font-semibold text-slate-600 mb-1">Descrizione dell'idea o Link dello scatto</label>
+                                <textarea id="photo-notes" rows="3" placeholder="Descrivi brevemente lo scatto fotografico che vorresti proporre o inserisci un link al file aziendale..." class="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-corporate-500"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- PRIVACY CHECKBOX -->
+                        <div class="flex items-start gap-3 pt-2">
+                            <input type="checkbox" id="privacy" required class="mt-1 w-4 h-4 text-corporate-600 border-slate-300 rounded focus:ring-corporate-500 cursor-pointer">
+                            <label for="privacy" class="text-xs text-slate-600 leading-relaxed cursor-pointer">
+                                Accetto il trattamento dei dati personali ai fini dell'organizzazione dell'iniziativa "Calendario Aziendale 2027" in conformità con le policy interne di riservatezza.
+                            </label>
+                        </div>
+
+                        <!-- SUBMIT BUTTON -->
+                        <button type="submit" class="w-full py-4 rounded-xl bg-corporate-600 hover:bg-corporate-700 text-white font-bold text-base shadow-lg shadow-corporate-600/30 transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Invia la tua Adesione
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MAIN CONTENT VIEW: ADMIN DASHBOARD -->
+    <main id="admin-view" class="flex-grow hidden bg-slate-100 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            
+            <!-- Admin Header -->
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Dashboard Amministrazione</h2>
+                    <p class="text-slate-500 text-sm">Gestione delle registrazioni e analisi delle candidature ricevute</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="exportToCSV()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl text-sm shadow-sm transition flex items-center gap-2">
+                        <i class="fa-solid fa-file-excel"></i> Esporta CSV
+                    </button>
+                    <button onclick="clearAllSubmissions()" class="px-4 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 font-medium rounded-xl text-sm transition flex items-center gap-2">
+                        <i class="fa-solid fa-trash-can"></i> Svuota Lista
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filters Bar -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                    <input type="text" id="admin-search" oninput="renderAdminTable()" placeholder="Cerca per nome o email..." class="w-full px-4 py-2 rounded-lg border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-corporate-500">
+                </div>
+                <div>
+                    <select id="admin-filter-dept" onchange="renderAdminTable()" class="w-full px-4 py-2 rounded-lg border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-corporate-500 bg-white">
+                        <option value="ALL">Tutti i Reparti</option>
+                        <option value="IT & Digital Innovation">IT & Digital Innovation</option>
+                        <option value="Risorse Umane (HR)">Risorse Umane (HR)</option>
+                        <option value="Marketing & Comunicazione">Marketing & Comunicazione</option>
+                        <option value="Commerciale & Vendite">Commerciale & Vendite</option>
+                        <option value="Amministrazione & Finanza">Amministrazione & Finanza</option>
+                        <option value="Produzione & Logistica">Produzione & Logistica</option>
+                        <option value="R&D / Ricerca">R&D / Ricerca</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="admin-filter-type" onchange="renderAdminTable()" class="w-full px-4 py-2 rounded-lg border border-slate-300 text-sm outline-none focus:ring-2 focus:ring-corporate-500 bg-white">
+                        <option value="ALL">Tutti i Tipi di Adesione</option>
+                        <option value="copia">Solo Copia</option>
+                        <option value="foto">Solo Foto</option>
+                        <option value="entrambe">Entrambe</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Table Card -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold text-xs uppercase tracking-wider">
+                                <th class="p-4">Data/Ora</th>
+                                <th class="p-4">Nome & Email</th>
+                                <th class="p-4">Reparto</th>
+                                <th class="p-4">Tipo Adesione</th>
+                                <th class="p-4">Mese Preferito</th>
+                                <th class="p-4">Note / Foto</th>
+                                <th class="p-4 text-right">Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body" class="divide-y divide-slate-100 text-sm">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="admin-empty-state" class="hidden p-12 text-center text-slate-400">
+                    <i class="fa-solid fa-inbox text-4xl mb-3"></i>
+                    <p class="font-medium">Nessuna registrazione trovata.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs space-y-2">
+            <p>&copy; 2027 Portale Iniziative Aziendali Internal Communications. Tutti i diritti riservati.</p>
+            <p class="text-slate-500">Sviluppato per la gestione delle adesioni al Calendario Ufficiale.</p>
+        </div>
+    </footer>
+
+    <!-- FIREBASE & APPLICATION LOGIC -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Firebase Configuration fallback or runtime config
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : {
+                // Placeholder fallback for standard deployment
+                apiKey: "demo-api-key",
+                authDomain: "demo-project.firebaseapp.com",
+                projectId: "demo-project",
+                storageBucket: "demo-project.appspot.com",
+                messagingSenderId: "123456789",
+                appId: "1:123456789:web:demo"
+            };
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'calendario-aziendale-2027';
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+        let submissionsList = [];
+
+        // Auth initialization
+        async function initAuth() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (err) {
+                console.error("Auth error, fallback to anonymous:", err);
+                try { await signInAnonymously(auth); } catch (e) {}
+            }
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            if (user) {
+                subscribeToPublicSubmissions();
+            }
+        });
+
+        // Mandatory Rule 1: Public collection path
+        function getCollectionRef() {
+            return collection(db, 'artifacts', appId, 'public', 'data', 'submissions');
+        }
+
+        // Realtime Subscription
+        function subscribeToPublicSubmissions() {
+            const colRef = getCollectionRef();
+            onSnapshot(colRef, (snapshot) => {
+                submissionsList = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                // Client-side sorting by timestamp (Rule 2)
+                submissionsList.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                
+                updateStats();
+                if (!document.getElementById('admin-view').classList.contains('hidden')) {
+                    renderAdminTable();
+                }
+            }, (error) => {
+                console.error("Firestore listener error:", error);
+            });
+        }
+
+        // Global functions exposed to window
+        window.handleFormSubmit = async function(e) {
+            e.preventDefault();
+
+            const fullname = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const department = document.getElementById('department').value;
+            const type = document.getElementById('participation-type').value;
+            const month = type !== 'copia' ? document.getElementById('month-preference').value : 'N/A';
+            const notes = type !== 'copia' ? document.getElementById('photo-notes').value.trim() : '';
+
+            const newSubmission = {
+                timestamp: new Date().toLocaleString('it-IT'),
+                createdAt: Date.now(),
+                fullname,
+                email,
+                department,
+                type,
+                month,
+                notes,
+                userId: currentUser ? currentUser.uid : 'anon'
+            };
+
+            try {
+                if (currentUser) {
+                    await addDoc(getCollectionRef(), newSubmission);
+                } else {
+                    // Fallback to local array if offline/no auth
+                    submissionsList.unshift({ id: 'local_' + Date.now(), ...newSubmission });
+                    updateStats();
+                }
+
+                document.getElementById('form-adesione').reset();
+                window.togglePhotoSection();
+                showToast('Adesione registrata con successo nel Cloud!', 'success');
+            } catch (err) {
+                console.error("Errore salvataggio:", err);
+                showToast('Si è verificato un errore durante l\'invio.', 'error');
+            }
+        };
+
+        window.deleteSubmission = async function(id) {
+            try {
+                if (id.startsWith('local_')) {
+                    submissionsList = submissionsList.filter(i => i.id !== id);
+                    updateStats();
+                    renderAdminTable();
+                } else {
+                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'submissions', id));
+                }
+                showToast('Voce eliminata.', 'info');
+            } catch (err) {
+                console.error("Errore eliminazione:", err);
+                showToast('Impossibile eliminare la voce.', 'error');
+            }
+        };
+
+        window.clearAllSubmissions = async function() {
+            if (confirm('Sei sicuro di voler cancellare tutte le adesioni visibili?')) {
+                for (const item of submissionsList) {
+                    if (!item.id.startsWith('local_')) {
+                        try {
+                            await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'submissions', item.id));
+                        } catch (e) {}
+                    }
+                }
+                submissionsList = [];
+                updateStats();
+                renderAdminTable();
+                showToast('Elenco svuotato.', 'info');
+            }
+        };
+
+        window.getSubmissions = function() {
+            return submissionsList;
+        };
+
+        // Initialize Auth
+        initAuth();
+    </script>
+
+    <!-- UI HELPER SCRIPTS -->
+    <script>
+        const monthsData = [
+            { id: 1, name: "Gennaio", theme: "Visione & Inizio", icon: "fa-rocket", color: "from-blue-500 to-indigo-600", desc: "Le nuove sfide e l'orientamento al futuro aziendale." },
+            { id: 2, name: "Febbraio", theme: "Sostenibilità & Green", icon: "fa-leaf", color: "from-emerald-500 to-teal-600", desc: "Le nostre azioni quotidiane per l'ambiente." },
+            { id: 3, name: "Marzo", theme: "Innovazione Digitale", icon: "fa-microchip", color: "from-cyan-500 to-blue-600", desc: "Tecnologia e trasformazione al servizio del lavoro." },
+            { id: 4, name: "Aprile", theme: "Sicurezza Prima di Tutto", icon: "fa-shield-halved", color: "from-amber-500 to-orange-600", desc: "Cultura della prevenzione e benessere sul lavoro." },
+            { id: 5, name: "Maggio", theme: "People & Welfare", icon: "fa-heart", color: "from-rose-500 to-pink-600", desc: "Mettiamo le persone e l'equilibrio al centro." },
+            { id: 6, name: "Giugno", theme: "Teamwork & Sinergia", icon: "fa-people-group", color: "from-purple-500 to-violet-600", desc: "La forza della collaborazione tra reparti." },
+            { id: 7, name: "Luglio", theme: "Diversity & Inclusion", icon: "fa-hands-holding-circle", color: "from-teal-500 to-emerald-600", desc: "Valorizzare le unicità e le differenti prospettive." },
+            { id: 8, name: "Agosto", theme: "Work-Life Balance", icon: "fa-sun", color: "from-amber-400 to-yellow-600", desc: "Energia, tempo libero e ricarica professionale." },
+            { id: 9, name: "Settembre", theme: "Formazione & Growth", icon: "fa-graduation-cap", color: "from-blue-600 to-slate-700", desc: "Investire nell'apprendimento continuo." },
+            { id: 10, name: "Ottobre", theme: "Qualità & Eccellenza", icon: "fa-award", color: "from-yellow-500 to-amber-700", desc: "Cura dei dettagli e passione nei nostri prodotti/servizi." },
+            { id: 11, name: "Novembre", theme: "Comunità & Territorio", icon: "fa-handshake", color: "from-indigo-600 to-purple-800", desc: "Il nostro impatto sociale ed il legame locale." },
+            { id: 12, name: "Dicembre", theme: "Traguardi & Celebrazione", icon: "fa-champagne-glasses", color: "from-rose-600 to-red-700", desc: "I successi raggiunti ed i festeggiamenti di fine anno." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMonths();
+            togglePhotoSection();
+        });
+
+        function renderMonths() {
+            const container = document.getElementById('months-container');
+            container.innerHTML = monthsData.map(m => `
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-10 h-10 rounded-xl bg-gradient-to-br ${m.color} text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                                <i class="fa-solid ${m.icon}"></i>
+                            </span>
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">${m.name}</span>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-base mb-1 group-hover:text-corporate-600 transition">${m.theme}</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">${m.desc}</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-[11px] text-emerald-600 font-medium flex items-center gap-1">
+                            <i class="fa-solid fa-circle text-[8px]"></i> Candidabile
+                        </span>
+                        <a href="#adesione" onclick="selectMonthInForm('${m.name}')" class="text-xs font-bold text-corporate-600 hover:text-corporate-800">
+                            Scegli Mese <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectMonthInForm(monthName) {
+            const typeSelect = document.getElementById('participation-type');
+            if (typeSelect.value === 'copia') {
+                typeSelect.value = 'entrambe';
+                togglePhotoSection();
+            }
+            const monthSelect = document.getElementById('month-preference');
+            monthSelect.value = monthName;
+        }
+
+        function togglePhotoSection() {
+            const type = document.getElementById('participation-type').value;
+            const photoSection = document.getElementById('photo-submission-section');
+            if (type === 'copia') {
+                photoSection.classList.add('hidden');
+            } else {
+                photoSection.classList.remove('hidden');
+            }
+        }
+
+        function updateStats() {
+            const list = window.getSubmissions ? window.getSubmissions() : [];
+            document.getElementById('badge-count').textContent = list.length;
+            document.getElementById('stat-total-submissions').textContent = list.length;
+        }
+
+        function switchTab(tab) {
+            const userView = document.getElementById('user-view');
+            const adminView = document.getElementById('admin-view');
+            const btnUser = document.getElementById('btn-tab-user');
+            const btnAdmin = document.getElementById('btn-tab-admin');
+
+            if (tab === 'user') {
+                userView.classList.remove('hidden');
+                adminView.classList.add('hidden');
+                btnUser.className = "px-4 py-2 text-sm font-medium rounded-lg bg-corporate-50 text-corporate-700 border border-corporate-200 shadow-sm flex items-center gap-2";
+                btnAdmin.className = "px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:bg-slate-100 transition flex items-center gap-2";
+            } else {
+                userView.classList.add('hidden');
+                adminView.classList.remove('hidden');
+                btnAdmin.className = "px-4 py-2 text-sm font-medium rounded-lg bg-corporate-50 text-corporate-700 border border-corporate-200 shadow-sm flex items-center gap-2";
+                btnUser.className = "px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:bg-slate-100 transition flex items-center gap-2";
+                renderAdminTable();
+            }
+        }
+
+        function renderAdminTable() {
+            const submissions = window.getSubmissions ? window.getSubmissions() : [];
+            const search = document.getElementById('admin-search').value.toLowerCase();
+            const filterDept = document.getElementById('admin-filter-dept').value;
+            const filterType = document.getElementById('admin-filter-type').value;
+
+            const tbody = document.getElementById('admin-table-body');
+            const emptyState = document.getElementById('admin-empty-state');
+
+            const filtered = submissions.filter(item => {
+                const matchesSearch = (item.fullname || '').toLowerCase().includes(search) || (item.email || '').toLowerCase().includes(search);
+                const matchesDept = filterDept === 'ALL' || item.department === filterDept;
+                const matchesType = filterType === 'ALL' || item.type === filterType;
+                return matchesSearch && matchesDept && matchesType;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            tbody.innerHTML = filtered.map(item => `
+                <tr class="hover:bg-slate-50/80 transition">
+                    <td class="p-4 text-xs text-slate-400 whitespace-nowrap">${item.timestamp}</td>
+                    <td class="p-4">
+                        <div class="font-semibold text-slate-900">${escapeHtml(item.fullname)}</div>
+                        <div class="text-xs text-slate-500">${escapeHtml(item.email)}</div>
+                    </td>
+                    <td class="p-4 text-slate-600">${escapeHtml(item.department)}</td>
+                    <td class="p-4">
+                        <span class="px-2.5 py-1 text-xs font-medium rounded-full ${
+                            item.type === 'copia' ? 'bg-blue-100 text-blue-700' : 
+                            item.type === 'foto' ? 'bg-amber-100 text-amber-700' : 
+                            'bg-emerald-100 text-emerald-700'
+                        }">
+                            ${item.type === 'copia' ? 'Solo Copia' : item.type === 'foto' ? 'Solo Foto' : 'Copia + Foto'}
+                        </span>
+                    </td>
+                    <td class="p-4 font-medium text-slate-700">${escapeHtml(item.month)}</td>
+                    <td class="p-4 text-xs text-slate-500 max-w-xs truncate" title="${escapeHtml(item.notes)}">
+                        ${item.notes ? escapeHtml(item.notes) : '<span class="text-slate-300">-</span>'}
+                    </td>
+                    <td class="p-4 text-right">
+                        <button onclick="deleteSubmission('${item.id}')" class="p-2 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function exportToCSV() {
+            const list = window.getSubmissions ? window.getSubmissions() : [];
+            if (list.length === 0) {
+                showToast('Nessun dato da esportare.', 'error');
+                return;
+            }
+
+            const headers = ['Data Ora', 'Nome e Cognome', 'Email', 'Reparto', 'Tipo Adesione', 'Mese Preferito', 'Note'];
+            const rows = list.map(item => [
+                `"${item.timestamp || ''}"`,
+                `"${item.fullname || ''}"`,
+                `"${item.email || ''}"`,
+                `"${item.department || ''}"`,
+                `"${item.type || ''}"`,
+                `"${item.month || ''}"`,
+                `"${(item.notes || '').replace(/"/g, '""')}"`
+            ]);
+
+            const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement('a');
+            link.setAttribute('href', encodedUri);
+            link.setAttribute('download', `Adesioni_Calendario_2027_${new Date().toISOString().slice(0,10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast('File CSV scaricato con successo!', 'success');
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const bgClass = type === 'success' ? 'bg-slate-900 text-emerald-400 border-emerald-500/30' :
+                            type === 'error' ? 'bg-slate-900 text-rose-400 border-rose-500/30' :
+                            'bg-slate-900 text-blue-400 border-blue-500/30';
+            
+            const icon = type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-triangle-exclamation' : 'fa-circle-info';
+
+            toast.className = `flex items-center gap-3 px-4 py-3 rounded-xl border shadow-xl text-xs font-medium ${bgClass} transition duration-300 transform translate-y-2 opacity-0`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-base"></i> <span>${escapeHtml(message)}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>"']/g, function(m) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+            });
+        }
+    </script>
+</body>
+</html>

@@ -231,7 +231,7 @@
         </div>
       </section>
 
-      <!-- SEZIONE REGOLAMENTO (AGGIORNATA CON FIL ROUGE, MODALITÀ VOTO E VOTO PANZER) -->
+      <!-- SEZIONE REGOLAMENTO -->
       <section id="regolamento" class="py-16 bg-slate-900/60 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center max-w-3xl mx-auto mb-12">
@@ -268,7 +268,7 @@
                   <h3 class="text-lg font-bold text-white">💶 Costo & Prenotazione</h3>
                 </div>
                 <p class="text-slate-300 text-sm leading-relaxed">
-                  Il costo indicativo per ogni copia è di <strong>5 €</strong>. L'intero ricavato coprirà i costi dell'iniziativa. Potete prenotare una o una pluralità di copie direttamente dal modulo qui sotto.
+                  Il costo indicativo per ogni copia è di <strong>5 €</strong>. L'intero ricavato coprirà i costi dell'iniziativa. Potete prenotare una o più copie direttamente dal modulo qui sotto.
                 </p>
               </div>
             </div>
@@ -320,10 +320,9 @@
             </div>
           </div>
 
-          <!-- RIGHE AGGIUNTIVE REGOLAMENTO (FIL ROUGE, MODALITÀ VOTO, VOTO PANZER) -->
+          <!-- RIGHE REGOLAMENTO AGGIUNTIVE -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             
-            <!-- Fil Rouge: La Franci -->
             <div class="bg-slate-900/90 border border-cyan-500/30 rounded-2xl p-6 shadow-lg flex flex-col justify-between">
               <div>
                 <div class="flex items-center space-x-3 mb-3">
@@ -341,7 +340,6 @@
               </div>
             </div>
 
-            <!-- Modalità di Votazione -->
             <div class="bg-slate-900/90 border border-amber-500/30 rounded-2xl p-6 shadow-lg flex flex-col justify-between">
               <div>
                 <div class="flex items-center space-x-3 mb-3">
@@ -359,7 +357,6 @@
               </div>
             </div>
 
-            <!-- Voto Segreto del Panzer -->
             <div class="bg-slate-900/90 border border-rose-500/30 rounded-2xl p-6 shadow-lg flex flex-col justify-between">
               <div>
                 <div class="flex items-center space-x-3 mb-3">
@@ -496,7 +493,7 @@
                       class="w-full bg-gradient-to-r from-amber-500 via-amber-600 to-rose-600 text-slate-950 font-black py-4 rounded-xl shadow-xl hover:shadow-amber-500/25 transition flex items-center justify-center space-x-2">
                 <i class="fa-solid fa-paper-plane" x-show="!loading"></i>
                 <i class="fa-solid fa-spinner fa-spin" x-show="loading" x-cloak></i>
-                <span x-text="loading ? 'Generazione codice in corso...' : 'Invia Adesione e Ricevi Codice Voto'"></span>
+                <span x-text="loading ? 'Invio in corso sul Cloud...' : 'Invia Adesione e Ricevi Codice Voto'"></span>
               </button>
 
             </form>
@@ -506,7 +503,7 @@
 
     </div>
 
-    <!-- VISTA VOTAZIONI (LOADING / IN ARRIVO) -->
+    <!-- VISTA VOTAZIONI -->
     <div x-show="activeTab === 'voting'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-12 text-center max-w-3xl mx-auto shadow-2xl relative overflow-hidden">
         
@@ -519,29 +516,10 @@
           Sessione Fotografica In Corso
         </span>
 
-        <h2 class="text-3xl font-extrabold text-white mb-3">Le Votazioni Aprirebbero A Breve!</h2>
+        <h2 class="text-3xl font-extrabold text-white mb-3">Le Votazioni Apriranno A Breve!</h2>
         <p class="text-slate-300 text-base leading-relaxed mb-8 max-w-xl mx-auto">
           La piattaforma di voto per eleggere il <strong class="text-amber-400">"MESE PIÙ SIMPATICO"</strong> sarà attiva subito dopo la conclusione di tutti gli scatti fotografici al Campo Base di Arquata Scrivia (a partire dal <strong>4 Dicembre 2026</strong>).
         </p>
-
-        <!-- Preview blurred cards -->
-        <div class="relative bg-slate-950/60 p-6 rounded-2xl border border-slate-800/80 mb-8 backdrop-blur-sm">
-          <div class="filter blur-[3px] opacity-40 pointer-events-none grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <template x-for="i in [1,2,3,4,5,6,7,8]" :key="i">
-              <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 text-left">
-                <div class="w-full h-16 bg-slate-700/50 rounded-lg mb-2"></div>
-                <div class="h-3 bg-slate-700 rounded w-3/4 mb-1"></div>
-                <div class="h-2 bg-slate-700/60 rounded w-1/2"></div>
-              </div>
-            </template>
-          </div>
-          <div class="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/40 rounded-2xl">
-            <span class="text-sm font-bold text-white bg-slate-900/90 px-4 py-2 rounded-xl border border-slate-700 shadow-xl flex items-center space-x-2">
-              <i class="fa-solid fa-camera-retro text-amber-400"></i>
-              <span>Gli scatti si terranno dal 30 Nov al 3 Dic 2026</span>
-            </span>
-          </div>
-        </div>
 
         <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl text-xs text-slate-400 inline-block">
           💡 <strong>Promemoria:</strong> Per votare utilizzerai il tuo **Codice Votante** e il **PIN a 4 cifre** generati al momento dell'adesione!
@@ -555,18 +533,14 @@
       
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
         <div>
-          <h1 class="text-3xl font-extrabold text-white">Dashboard Amministrativa & Credenziali Voto</h1>
-          <p class="text-slate-400 text-sm">Monitoraggio adesioni, archivio prenotazioni e codici/PIN personali dei partecipanti.</p>
+          <h1 class="text-3xl font-extrabold text-white">Dashboard Amministrativa & Firebase Cloud</h1>
+          <p class="text-slate-400 text-sm">Monitoraggio adesioni in tempo reale su tutti i dispositivi connessi.</p>
         </div>
 
         <div class="flex items-center space-x-3">
           <button @click="exportCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-4 py-2 rounded-xl text-sm transition flex items-center space-x-2">
             <i class="fa-solid fa-file-excel"></i>
             <span>Esporta CSV / Excel</span>
-          </button>
-          <button @click="clearAllSubmissions()" class="bg-rose-900/40 border border-rose-700/50 hover:bg-rose-900/60 text-rose-200 font-semibold px-4 py-2 rounded-xl text-sm transition flex items-center space-x-2">
-            <i class="fa-solid fa-trash-can"></i>
-            <span>Svuota Registro</span>
           </button>
           <button @click="activeTab = 'user'; isAdminAuthenticated = false;" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold px-4 py-2 rounded-xl text-sm transition flex items-center space-x-2">
             <i class="fa-solid fa-lock"></i>
@@ -578,7 +552,6 @@
       <!-- STATISTICHE PER UFFICIO & CONTEST -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
         
-        <!-- Tabella Conteggio Uffici -->
         <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-lg font-bold text-white flex items-center space-x-2">
@@ -610,7 +583,6 @@
           </div>
         </div>
 
-        <!-- Box Podio Contest Live -->
         <div class="bg-gradient-to-br from-slate-900 to-amber-950/40 border border-amber-500/40 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
@@ -618,7 +590,7 @@
               <i class="fa-solid fa-trophy text-amber-400 text-xl"></i>
             </div>
             <h3 class="text-lg font-bold text-white mb-1">Stato Attuale Uffici</h3>
-            <p class="text-xs text-slate-300 mb-4">Ecco la classifica provvisoria degli uffici con più partecipanti iscritti all'iniziativa:</p>
+            <p class="text-xs text-slate-300 mb-4">Classifica provvisoria sincronizzata via cloud:</p>
 
             <div class="space-y-3">
               <template x-for="(item, index) in contestLeaderboard.slice(0, 3)" :key="item.dept">
@@ -638,7 +610,7 @@
           </div>
 
           <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400 text-center">
-            Il vincitore finale sarà decretato dai voti ufficiali al contest!
+            Aggiornato in tempo reale su Firebase
           </div>
         </div>
 
@@ -676,7 +648,7 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-800">
-              <template x-for="(sub, index) in filteredSubmissions" :key="index">
+              <template x-for="(sub, index) in filteredSubmissions" :key="sub.id">
                 <tr class="hover:bg-slate-800/40 transition">
                   <td class="py-3 px-4 whitespace-nowrap">
                     <span class="block font-mono font-bold text-cyan-400 text-xs" x-text="sub.voterId"></span>
@@ -696,7 +668,7 @@
                   <td class="py-3 px-4 text-center font-bold text-white" x-text="sub.copies || 0"></td>
                   <td class="py-3 px-4 text-xs text-slate-400 max-w-xs truncate" x-text="sub.notes || '-'"></td>
                   <td class="py-3 px-4 text-right">
-                    <button @click="deleteSubmission(index)" class="text-slate-400 hover:text-rose-400 p-1.5 transition">
+                    <button @click="deleteSubmission(sub.id)" class="text-slate-400 hover:text-rose-400 p-1.5 transition">
                       <i class="fa-solid fa-trash"></i>
                     </button>
                   </td>
@@ -705,7 +677,7 @@
               <tr x-show="filteredSubmissions.length === 0">
                 <td colspan="7" class="py-12 text-center text-slate-500">
                   <i class="fa-solid fa-inbox text-3xl mb-2 block"></i>
-                  Nessuna adesione trovata con i filtri selezionati.
+                  Nessuna adesione trovata.
                 </td>
               </tr>
             </tbody>
@@ -739,9 +711,25 @@
     <div class="text-sm" x-text="toast.message"></div>
   </div>
 
-  <!-- SCRIPT LOGIC APPLICAZIONE -->
-  <script>
-    function portalApp() {
+  <!-- FIREBASE SDK & LOGICA APPLICAZIONE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA5jSB7Ixxt9stOZByArlVW8WmX_5LcLR0",
+      authDomain: "dt22027-1f9d3.firebaseapp.com",
+      projectId: "dt22027-1f9d3",
+      storageBucket: "dt22027-1f9d3.firebasestorage.app",
+      messagingSenderId: "857892622227",
+      appId: "1:857892622227:web:d5477b41765782f0856266",
+      measurementId: "G-2YB1V3RBFM"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.portalApp = function() {
       return {
         activeTab: 'user',
         loading: false,
@@ -751,91 +739,29 @@
         adminPassword: 'Ungiornoinmenoallastella',
         adminSearch: '',
         adminFilterOffice: '',
-        adminFilterType: '',
         lastSubmission: null,
         
         departments: [
-          'Ambiente',
-          'DCP5',
-          'Capo Campo e Struttura',
-          'Sicurezza',
-          'Topografia/Monitoraggio + lemmi',
-          'Magazzino/TIM+Danilo',
-          'DCP3',
-          'DCP4/DCP2/DCL2',
-          'Amministrazione',
-          'Contabilità',
-          'Qualità',
-          'Cost Control/Planner/Direzione',
-          'Copertina (DT2)'
+          'Ambiente', 'DCP5', 'Capo Campo e Struttura', 'Sicurezza',
+          'Topografia/Monitoraggio + lemmi', 'Magazzino/TIM+Danilo', 'DCP3',
+          'DCP4/DCP2/DCL2', 'Amministrazione', 'Contabilità', 'Qualità',
+          'Cost Control/Planner/Direzione', 'Copertina (DT2)'
         ],
 
         months: [
-          { 
-            id: 1, name: 'Gennaio', subject: 'Neve', office: 'Ambiente', date: 'lun 30 nov 2026', icon: 'fa-solid fa-snowflake',
-            bgClass: 'bg-gradient-to-br from-cyan-950/80 via-slate-900 to-slate-900 border-cyan-500/40',
-            glowClass: 'bg-cyan-500', iconBadge: 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
-          },
-          { 
-            id: 2, name: 'Febbraio', subject: 'Carnevale', office: 'DCP5', date: 'lun 30 nov 2026', icon: 'fa-solid fa-masks-theater',
-            bgClass: 'bg-gradient-to-br from-purple-950/80 via-slate-900 to-slate-900 border-purple-500/40',
-            glowClass: 'bg-purple-500', iconBadge: 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
-          },
-          { 
-            id: 3, name: 'Marzo', subject: 'Primavera', office: 'Capo Campo e Struttura', date: 'lun 30 nov 2026', icon: 'fa-solid fa-seedling',
-            bgClass: 'bg-gradient-to-br from-emerald-950/80 via-slate-900 to-slate-900 border-emerald-500/40',
-            glowClass: 'bg-emerald-500', iconBadge: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-          },
-          { 
-            id: 4, name: 'Aprile', subject: 'Pasqua', office: 'Sicurezza', date: 'lun 30 nov 2026', icon: 'fa-solid fa-shield-halved',
-            bgClass: 'bg-gradient-to-br from-amber-950/80 via-slate-900 to-slate-900 border-amber-500/40',
-            glowClass: 'bg-amber-500', iconBadge: 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-          },
-          { 
-            id: 5, name: 'Maggio', subject: 'Grigliate', office: 'Topografia/Monitoraggio + lemmi', date: 'mar 1 dic 2026', icon: 'fa-solid fa-fire-burner',
-            bgClass: 'bg-gradient-to-br from-orange-950/80 via-slate-900 to-slate-900 border-orange-500/40',
-            glowClass: 'bg-orange-500', iconBadge: 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
-          },
-          { 
-            id: 6, name: 'Giugno', subject: 'Primo Bagnetto', office: 'Magazzino/TIM+Danilo', date: 'mar 1 dic 2026', icon: 'fa-solid fa-water',
-            bgClass: 'bg-gradient-to-br from-sky-950/80 via-slate-900 to-slate-900 border-sky-500/40',
-            glowClass: 'bg-sky-500', iconBadge: 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
-          },
-          { 
-            id: 7, name: 'Luglio', subject: 'Campeggio', office: 'DCP3', date: 'mar 1 dic 2026', icon: 'fa-solid fa-campground',
-            bgClass: 'bg-gradient-to-br from-teal-950/80 via-slate-900 to-slate-900 border-teal-500/40',
-            glowClass: 'bg-teal-500', iconBadge: 'bg-teal-500/20 text-teal-400 border border-teal-500/30'
-          },
-          { 
-            id: 8, name: 'Agosto', subject: 'Spiaggia', office: 'DCP4/DCP2/DCL2', date: 'mar 1 dic 2026', icon: 'fa-solid fa-umbrella-beach',
-            bgClass: 'bg-gradient-to-br from-yellow-950/80 via-slate-900 to-slate-900 border-yellow-500/40',
-            glowClass: 'bg-yellow-500', iconBadge: 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
-          },
-          { 
-            id: 9, name: 'Settembre', subject: 'Rientro', office: 'Amministrazione', date: 'mer 2 dic 2026', icon: 'fa-solid fa-briefcase',
-            bgClass: 'bg-gradient-to-br from-indigo-950/80 via-slate-900 to-slate-900 border-indigo-500/40',
-            glowClass: 'bg-indigo-500', iconBadge: 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30'
-          },
-          { 
-            id: 10, name: 'Ottobre', subject: 'Halloween/Castagne', office: 'Contabilità', date: 'mer 2 dic 2026', icon: 'fa-solid fa-ghost',
-            bgClass: 'bg-gradient-to-br from-rose-950/80 via-slate-900 to-slate-900 border-rose-500/40',
-            glowClass: 'bg-rose-500', iconBadge: 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
-          },
-          { 
-            id: 11, name: 'Novembre', subject: 'Primi Freddi', office: 'Qualità', date: 'mer 2 dic 2026', icon: 'fa-solid fa-mug-hot',
-            bgClass: 'bg-gradient-to-br from-blue-950/80 via-slate-900 to-slate-900 border-blue-500/40',
-            glowClass: 'bg-blue-500', iconBadge: 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-          },
-          { 
-            id: 12, name: 'Dicembre', subject: 'Cenone / Regali / Presepe', office: 'Cost Control/Planner/Direzione', date: 'mer 2 dic 2026', icon: 'fa-solid fa-gift',
-            bgClass: 'bg-gradient-to-br from-red-950/80 via-slate-900 to-slate-900 border-red-500/40',
-            glowClass: 'bg-red-500', iconBadge: 'bg-red-500/20 text-red-400 border border-red-500/30'
-          },
-          { 
-            id: 13, name: 'Speciale', subject: "Libero / Ognuno del proprio ufficio", office: 'Copertina (DT2)', date: 'gio 3 dic 2026', icon: 'fa-solid fa-star',
-            bgClass: 'bg-gradient-to-br from-amber-900/80 via-slate-900 to-slate-900 border-amber-400/60 sm:col-span-2 lg:col-span-3 xl:col-span-4',
-            glowClass: 'bg-amber-400', iconBadge: 'bg-amber-400/20 text-amber-300 border border-amber-400/30'
-          }
+          { id: 1, name: 'Gennaio', subject: 'Neve', office: 'Ambiente', date: 'lun 30 nov 2026', icon: 'fa-solid fa-snowflake', bgClass: 'bg-gradient-to-br from-cyan-950/80 via-slate-900 to-slate-900 border-cyan-500/40', glowClass: 'bg-cyan-500', iconBadge: 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30' },
+          { id: 2, name: 'Febbraio', subject: 'Carnevale', office: 'DCP5', date: 'lun 30 nov 2026', icon: 'fa-solid fa-masks-theater', bgClass: 'bg-gradient-to-br from-purple-950/80 via-slate-900 to-slate-900 border-purple-500/40', glowClass: 'bg-purple-500', iconBadge: 'bg-purple-500/20 text-purple-400 border border-purple-500/30' },
+          { id: 3, name: 'Marzo', subject: 'Primavera', office: 'Capo Campo e Struttura', date: 'lun 30 nov 2026', icon: 'fa-solid fa-seedling', bgClass: 'bg-gradient-to-br from-emerald-950/80 via-slate-900 to-slate-900 border-emerald-500/40', glowClass: 'bg-emerald-500', iconBadge: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' },
+          { id: 4, name: 'Aprile', subject: 'Pasqua', office: 'Sicurezza', date: 'lun 30 nov 2026', icon: 'fa-solid fa-shield-halved', bgClass: 'bg-gradient-to-br from-amber-950/80 via-slate-900 to-slate-900 border-amber-500/40', glowClass: 'bg-amber-500', iconBadge: 'bg-amber-500/20 text-amber-400 border border-amber-500/30' },
+          { id: 5, name: 'Maggio', subject: 'Grigliate', office: 'Topografia/Monitoraggio + lemmi', date: 'mar 1 dic 2026', icon: 'fa-solid fa-fire-burner', bgClass: 'bg-gradient-to-br from-orange-950/80 via-slate-900 to-slate-900 border-orange-500/40', glowClass: 'bg-orange-500', iconBadge: 'bg-orange-500/20 text-orange-400 border border-orange-500/30' },
+          { id: 6, name: 'Giugno', subject: 'Primo Bagnetto', office: 'Magazzino/TIM+Danilo', date: 'mar 1 dic 2026', icon: 'fa-solid fa-water', bgClass: 'bg-gradient-to-br from-sky-950/80 via-slate-900 to-slate-900 border-sky-500/40', glowClass: 'bg-sky-500', iconBadge: 'bg-sky-500/20 text-sky-400 border border-sky-500/30' },
+          { id: 7, name: 'Luglio', subject: 'Campeggio', office: 'DCP3', date: 'mar 1 dic 2026', icon: 'fa-solid fa-campground', bgClass: 'bg-gradient-to-br from-teal-950/80 via-slate-900 to-slate-900 border-teal-500/40', glowClass: 'bg-teal-500', iconBadge: 'bg-teal-500/20 text-teal-400 border border-teal-500/30' },
+          { id: 8, name: 'Agosto', subject: 'Spiaggia', office: 'DCP4/DCP2/DCL2', date: 'mar 1 dic 2026', icon: 'fa-solid fa-umbrella-beach', bgClass: 'bg-gradient-to-br from-yellow-950/80 via-slate-900 to-slate-900 border-yellow-500/40', glowClass: 'bg-yellow-500', iconBadge: 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' },
+          { id: 9, name: 'Settembre', subject: 'Rientro', office: 'Amministrazione', date: 'mer 2 dic 2026', icon: 'fa-solid fa-briefcase', bgClass: 'bg-gradient-to-br from-indigo-950/80 via-slate-900 to-slate-900 border-indigo-500/40', glowClass: 'bg-indigo-500', iconBadge: 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30' },
+          { id: 10, name: 'Ottobre', subject: 'Halloween/Castagne', office: 'Contabilità', date: 'mer 2 dic 2026', icon: 'fa-solid fa-ghost', bgClass: 'bg-gradient-to-br from-rose-950/80 via-slate-900 to-slate-900 border-rose-500/40', glowClass: 'bg-rose-500', iconBadge: 'bg-rose-500/20 text-rose-400 border border-rose-500/30' },
+          { id: 11, name: 'Novembre', subject: 'Primi Freddi', office: 'Qualità', date: 'mer 2 dic 2026', icon: 'fa-solid fa-mug-hot', bgClass: 'bg-gradient-to-br from-blue-950/80 via-slate-900 to-slate-900 border-blue-500/40', glowClass: 'bg-blue-500', iconBadge: 'bg-blue-500/20 text-blue-400 border border-blue-500/30' },
+          { id: 12, name: 'Dicembre', subject: 'Cenone / Regali / Presepe', office: 'Cost Control/Planner/Direzione', date: 'mer 2 dic 2026', icon: 'fa-solid fa-gift', bgClass: 'bg-gradient-to-br from-red-950/80 via-slate-900 to-slate-900 border-red-500/40', glowClass: 'bg-red-500', iconBadge: 'bg-red-500/20 text-red-400 border border-red-500/30' },
+          { id: 13, name: 'Speciale', subject: "Libero / Ognuno del proprio ufficio", office: 'Copertina (DT2)', date: 'gio 3 dic 2026', icon: 'fa-solid fa-star', bgClass: 'bg-gradient-to-br from-amber-900/80 via-slate-900 to-slate-900 border-amber-400/60 sm:col-span-2 lg:col-span-3 xl:col-span-4', glowClass: 'bg-amber-400', iconBadge: 'bg-amber-400/20 text-amber-300 border border-amber-400/30' }
         ],
 
         form: {
@@ -856,21 +782,25 @@
         },
 
         initApp() {
-          const saved = localStorage.getItem('calendar_submissions_2027');
-          if (saved) {
-            try {
-              this.submissions = JSON.parse(saved);
-            } catch (e) {
-              this.submissions = [];
-            }
-          }
+          // Ascolto in tempo reale da Cloud Firestore
+          const q = query(collection(db, "adesioni_2027"));
+          onSnapshot(q, (snapshot) => {
+            let dataList = [];
+            snapshot.forEach((docSnap) => {
+              dataList.push({ id: docSnap.id, ...docSnap.data() });
+            });
+            // Ordinamento temporale discendente
+            this.submissions = dataList.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+          }, (error) => {
+            console.error("Errore di sincronizzazione in tempo reale:", error);
+          });
         },
 
         checkAdminAccess() {
           if (this.isAdminAuthenticated) {
             this.activeTab = 'admin';
           } else {
-            this.enteredPassword = 'Ungiornoinmenoallastella';
+            this.enteredPassword = '';
             this.showPasswordModal = true;
           }
         },
@@ -894,26 +824,32 @@
           setTimeout(() => { this.toast.show = false; }, 4000);
         },
 
-        submitForm() {
+        async submitForm() {
           this.loading = true;
 
-          setTimeout(() => {
+          try {
             const voterId = 'DT2-' + Math.floor(1000 + Math.random() * 9000);
             const voterPin = Math.floor(1000 + Math.random() * 9000).toString();
 
             const newEntry = {
-              ...this.form,
+              firstName: this.form.firstName,
+              lastName: this.form.lastName,
+              office: this.form.office,
+              participationType: this.form.participationType,
+              copies: Number(this.form.copies || 1),
+              notes: this.form.notes || '',
               voterId: voterId,
               voterPin: voterPin,
-              date: new Date().toLocaleDateString('it-IT') + ' ' + new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })
+              date: new Date().toLocaleDateString('it-IT') + ' ' + new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }),
+              createdAt: new Date().toISOString()
             };
 
-            this.submissions.unshift(newEntry);
-            localStorage.setItem('calendar_submissions_2027', JSON.stringify(this.submissions));
+            // Salvataggio nel Cloud Firestore (si aggiorna istantaneamente su tutti i dispositivi!)
+            await addDoc(collection(db, "adesioni_2027"), newEntry);
 
             this.lastSubmission = newEntry;
             this.loading = false;
-            this.showNotification('Adesione inviata! Codice Voto generato.');
+            this.showNotification('Adesione inviata con successo sul Cloud!');
 
             this.form = {
               firstName: '',
@@ -923,7 +859,11 @@
               copies: 1,
               notes: ''
             };
-          }, 600);
+          } catch (e) {
+            console.error("Errore salvataggio Firebase:", e);
+            this.loading = false;
+            this.showNotification('Errore di connessione al Cloud. Riprova.', 'error');
+          }
         },
 
         getOfficeStats(dept) {
@@ -957,19 +897,15 @@
           });
         },
 
-        deleteSubmission(index) {
-          if (confirm('Sei sicuro di voler eliminare questa registrazione?')) {
-            this.submissions.splice(index, 1);
-            localStorage.setItem('calendar_submissions_2027', JSON.stringify(this.submissions));
-            this.showNotification('Registrazione eliminata.');
-          }
-        },
-
-        clearAllSubmissions() {
-          if (confirm('ATTENZIONE: Verranno eliminate TUTTE le adesioni registrate. Continuare?')) {
-            this.submissions = [];
-            localStorage.removeItem('calendar_submissions_2027');
-            this.showNotification('Tutte le adesioni sono state rimosse.');
+        async deleteSubmission(docId) {
+          if (confirm('Sei sicuro di voler eliminare questa registrazione dal Cloud?')) {
+            try {
+              await deleteDoc(doc(db, "adesioni_2027", docId));
+              this.showNotification('Registrazione eliminata.');
+            } catch (e) {
+              console.error("Errore eliminazione:", e);
+              this.showNotification('Errore durante l\'eliminazione.', 'error');
+            }
           }
         },
 
@@ -982,13 +918,13 @@
           let csvContent = "data:text/csv;charset=utf-8,Data,Codice_Voto,PIN,Nome,Cognome,Ufficio,Partecipazione,Copie,Note\n";
           this.submissions.forEach(row => {
             const line = [
-              `"${row.date}"`,
+              `"${row.date || ''}"`,
               `"${row.voterId || ''}"`,
               `"${row.voterPin || ''}"`,
-              `"${row.firstName}"`,
-              `"${row.lastName}"`,
-              `"${row.office}"`,
-              `"${row.participationType}"`,
+              `"${row.firstName || ''}"`,
+              `"${row.lastName || ''}"`,
+              `"${row.office || ''}"`,
+              `"${row.participationType || ''}"`,
               `"${row.copies || 0}"`,
               `"${(row.notes || '').replace(/"/g, '""')}"`
             ].join(",");
@@ -998,7 +934,7 @@
           const encodedUri = encodeURI(csvContent);
           const link = document.createElement("a");
           link.setAttribute("href", encodedUri);
-          link.setAttribute("download", "Adesioni_E_Credenziali_Calendario_2027.csv");
+          link.setAttribute("download", "Adesioni_Cloud_Calendario_2027.csv");
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);

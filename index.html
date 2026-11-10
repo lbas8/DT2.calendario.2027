@@ -714,7 +714,7 @@
   <!-- FIREBASE SDK & LOGICA APPLICAZIONE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA5jSB7Ixxt9stOZByArlVW8WmX_5LcLR0",
@@ -729,6 +729,7 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
+    // Registriamo la funzione a livello globale per Alpine.js
     window.portalApp = function() {
       return {
         activeTab: 'user',
@@ -736,7 +737,7 @@
         showPasswordModal: false,
         isAdminAuthenticated: false,
         enteredPassword: '',
-        adminPassword: 'Ungiornoinmenoallastella',
+        adminPassword: 'admin2027',
         adminSearch: '',
         adminFilterOffice: '',
         lastSubmission: null,
@@ -782,17 +783,15 @@
         },
 
         initApp() {
-          // Ascolto in tempo reale da Cloud Firestore
           const q = query(collection(db, "adesioni_2027"));
           onSnapshot(q, (snapshot) => {
             let dataList = [];
             snapshot.forEach((docSnap) => {
               dataList.push({ id: docSnap.id, ...docSnap.data() });
             });
-            // Ordinamento temporale discendente
             this.submissions = dataList.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
           }, (error) => {
-            console.error("Errore di sincronizzazione in tempo reale:", error);
+            console.error("Errore di sincronizzazione:", error);
           });
         },
 
@@ -844,7 +843,6 @@
               createdAt: new Date().toISOString()
             };
 
-            // Salvataggio nel Cloud Firestore (si aggiorna istantaneamente su tutti i dispositivi!)
             await addDoc(collection(db, "adesioni_2027"), newEntry);
 
             this.lastSubmission = newEntry;

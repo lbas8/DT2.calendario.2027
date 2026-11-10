@@ -711,10 +711,10 @@
     <div class="text-sm" x-text="toast.message"></div>
   </div>
 
-  <!-- FIREBASE SDK & LOGICA APPLICAZIONE -->
+  <!-- FIREBASE & LOGICA APPLICAZIONE (GLOBALE) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA5jSB7Ixxt9stOZByArlVW8WmX_5LcLR0",
@@ -729,8 +729,19 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Registriamo la funzione a livello globale per Alpine.js
-    window.portalApp = function() {
+    // Rendiamo db e le funzioni firebase accessibili globalmente
+    window.db = db;
+    window.colCollection = collection;
+    window.addDoc = addDoc;
+    window.deleteDoc = deleteDoc;
+    window.doc = doc;
+    window.onSnapshot = onSnapshot;
+    window.query = query;
+  </script>
+
+  <script>
+    // Oggetto Alpine.js globale
+    function portalApp() {
       return {
         activeTab: 'user',
         loading: false,
@@ -783,16 +794,19 @@
         },
 
         initApp() {
-          const q = query(collection(db, "adesioni_2027"));
-          onSnapshot(q, (snapshot) => {
-            let dataList = [];
-            snapshot.forEach((docSnap) => {
-              dataList.push({ id: docSnap.id, ...docSnap.data() });
-            });
-            this.submissions = dataList.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
-          }, (error) => {
-            console.error("Errore di sincronizzazione:", error);
-          });
+          const checkFirebase = setInterval(() => {
+            if (window.db) {
+              clearInterval(checkFirebase);
+              const q = window.query(window.colCollection(window.db, "adesioni_2027"));
+              window.onSnapshot(q, (snapshot) => {
+                let dataList = [];
+                snapshot.forEach((docSnap) => {
+                  dataList.push({ id: docSnap.id, ...docSnap.data() });
+                });
+                this.submissions = dataList.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+              });
+            }
+          }, 100);
         },
 
         checkAdminAccess() {
@@ -843,7 +857,7 @@
               createdAt: new Date().toISOString()
             };
 
-            await addDoc(collection(db, "adesioni_2027"), newEntry);
+            await window.addDoc(window.colCollection(window.db, "adesioni_2027"), newEntry);
 
             this.lastSubmission = newEntry;
             this.loading = false;
@@ -898,7 +912,7 @@
         async deleteSubmission(docId) {
           if (confirm('Sei sicuro di voler eliminare questa registrazione dal Cloud?')) {
             try {
-              await deleteDoc(doc(db, "adesioni_2027", docId));
+              await window.deleteDoc(window.doc(window.db, "adesioni_2027", docId));
               this.showNotification('Registrazione eliminata.');
             } catch (e) {
               console.error("Errore eliminazione:", e);

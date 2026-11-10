@@ -84,10 +84,10 @@
           <span>Votazioni</span>
           <span class="bg-amber-400 text-slate-950 text-[9px] px-1.5 py-0.2 rounded-full font-black">SOON</span>
         </button>
-        <button @click="activeTab = 'admin'" 
+        <button @click="checkAdminAccess()" 
                 :class="activeTab === 'admin' ? 'bg-slate-700 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'"
                 class="px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center space-x-1.5 relative">
-          <i class="fa-solid fa-chart-pie"></i>
+          <i class="fa-solid fa-lock"></i>
           <span>Admin</span>
           <span x-show="submissions.length > 0" 
                 class="ml-1 bg-rose-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold" 
@@ -96,6 +96,31 @@
       </div>
     </div>
   </header>
+
+  <!-- MODALE PASSWORD ADMIN -->
+  <div x-show="showPasswordModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-md px-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-md w-full shadow-2xl text-center relative">
+      <div class="w-16 h-16 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl border border-amber-500/30">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <h3 class="text-xl font-black text-white mb-2">Area Riservata Admin</h3>
+      <p class="text-slate-400 text-xs mb-6">Inserisci la password di coordinamento per accedere al pannello di controllo.</p>
+
+      <form @submit.prevent="verifyAdminPassword()" class="space-y-4">
+        <input type="password" x-model="enteredPassword" placeholder="Inserisci password..." required
+               class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-center tracking-widest placeholder-slate-600 focus:outline-none focus:border-amber-500">
+        
+        <div class="flex space-x-3 pt-2">
+          <button type="button" @click="showPasswordModal = false" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-3 rounded-xl text-xs transition">
+            Annulla
+          </button>
+          <button type="submit" class="flex-1 bg-gradient-to-r from-amber-500 to-rose-600 text-slate-950 font-black py-3 rounded-xl text-xs shadow-lg transition">
+            Accedi
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- MAIN CONTENT -->
   <main class="flex-grow">
@@ -150,7 +175,7 @@
         </div>
       </section>
 
-      <!-- TEMI MENSILE & UFFICI (GRANDE RISALTO VISIVO) -->
+      <!-- TEMI MENSILE & UFFICI -->
       <section id="temi" class="py-16 bg-slate-950 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center max-w-3xl mx-auto mb-12">
@@ -161,17 +186,14 @@
             <p class="text-slate-400 mt-2">Trova il tuo ufficio, scopri il soggetto fotografico ed annota la data per la posa al Campo Base di Arquata Scrivia!</p>
           </div>
 
-          <!-- GRIGLIA COLORATA DEI MESI -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <template x-for="month in months" :key="month.id">
               <div class="rounded-2xl p-5 border shadow-xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl relative overflow-hidden"
                    :class="month.bgClass">
                 
-                <!-- Glow d'ambiente -->
                 <div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full opacity-20 pointer-events-none" :class="month.glowClass"></div>
 
                 <div>
-                  <!-- Header Scheda Mese -->
                   <div class="flex items-center justify-between mb-4">
                     <span class="text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded-md bg-slate-950/60 text-white border border-white/10" x-text="month.name"></span>
                     <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg shadow-md font-bold" :class="month.iconBadge">
@@ -179,20 +201,23 @@
                     </div>
                   </div>
 
-                  <!-- Soggetto Fotografico -->
                   <div class="mb-4">
                     <span class="text-[10px] font-black uppercase tracking-wider text-slate-300 block mb-0.5">Soggetto Scatto</span>
                     <h3 class="text-xl font-black text-white leading-tight" x-text="month.subject"></h3>
                   </div>
 
-                  <!-- UFFICIO DEDICATO (EVIDENZIATO) -->
-                  <div class="bg-slate-950/80 border border-white/15 p-3 rounded-xl mb-4 backdrop-blur-sm">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Ufficio di Riferimento</span>
-                    <span class="text-sm font-black text-amber-300 block mt-0.5" x-text="month.office"></span>
+                  <div class="bg-slate-950/80 border border-white/15 p-3 rounded-xl mb-4 backdrop-blur-sm flex items-center justify-between gap-2">
+                    <div>
+                      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Ufficio di Riferimento</span>
+                      <span class="text-sm font-black text-amber-300 block mt-0.5" x-text="month.office"></span>
+                    </div>
+                    <div class="flex-shrink-0 bg-slate-900/90 border border-amber-400/40 px-2.5 py-1 rounded-lg text-center shadow-inner">
+                      <span class="text-xs font-black text-emerald-400 block leading-none" x-text="getOfficeStats(month.office).count">0</span>
+                      <span class="text-[9px] font-bold text-slate-400 uppercase tracking-tighter block mt-0.5">iscritti</span>
+                    </div>
                   </div>
                 </div>
 
-                <!-- Footer Data Foto -->
                 <div class="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-slate-200">
                   <span class="flex items-center space-x-1.5">
                     <i class="fa-solid fa-camera text-amber-400"></i>
@@ -441,7 +466,7 @@
           Sessione Fotografica In Corso
         </span>
 
-        <h2 class="text-3xl font-extrabold text-white mb-3">Le Votazioni Apriranno A Breve! STAY TUNED!!!</h2>
+        <h2 class="text-3xl font-extrabold text-white mb-3">Le Votazioni Aprirebbero A Breve!</h2>
         <p class="text-slate-300 text-base leading-relaxed mb-8 max-w-xl mx-auto">
           La piattaforma di voto per eleggere il <strong class="text-amber-400">"MESE PIÙ SIMPATICO"</strong> sarà attiva subito dopo la conclusione di tutti gli scatti fotografici al Campo Base di Arquata Scrivia (a partire dal <strong>4 Dicembre 2026</strong>).
         </p>
@@ -472,7 +497,7 @@
       </div>
     </div>
 
-    <!-- DASHBOARD ADMIN -->
+    <!-- DASHBOARD ADMIN (PROTETTA DA PASSWORD) -->
     <div x-show="activeTab === 'admin'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
@@ -489,6 +514,10 @@
           <button @click="clearAllSubmissions()" class="bg-rose-900/40 border border-rose-700/50 hover:bg-rose-900/60 text-rose-200 font-semibold px-4 py-2 rounded-xl text-sm transition flex items-center space-x-2">
             <i class="fa-solid fa-trash-can"></i>
             <span>Svuota Registro</span>
+          </button>
+          <button @click="activeTab = 'user'; isAdminAuthenticated = false;" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold px-4 py-2 rounded-xl text-sm transition flex items-center space-x-2">
+            <i class="fa-solid fa-lock"></i>
+            <span>Blocca Admin</span>
           </button>
         </div>
       </div>
@@ -673,6 +702,10 @@
       return {
         activeTab: 'user',
         loading: false,
+        showPasswordModal: false,
+        isAdminAuthenticated: false,
+        enteredPassword: '',
+        adminPassword: 'admin2027', // <-- PUOI CAMBIARE QUI LA PASSWORD ADMIN
         adminSearch: '',
         adminFilterOffice: '',
         adminFilterType: '',
@@ -756,7 +789,7 @@
             glowClass: 'bg-red-500', iconBadge: 'bg-red-500/20 text-red-400 border border-red-500/30'
           },
           { 
-            id: 13, name: 'Speciale', subject: "Libero / Tema del proprio Ufficio", office: 'Copertina del Calendario DT2', date: 'gio 3 dic 2026', icon: 'fa-solid fa-star',
+            id: 13, name: 'Speciale', subject: "Libero / Ognuno del proprio ufficio", office: 'Copertina (DT2)', date: 'gio 3 dic 2026', icon: 'fa-solid fa-star',
             bgClass: 'bg-gradient-to-br from-amber-900/80 via-slate-900 to-slate-900 border-amber-400/60 sm:col-span-2 lg:col-span-3 xl:col-span-4',
             glowClass: 'bg-amber-400', iconBadge: 'bg-amber-400/20 text-amber-300 border border-amber-400/30'
           }
@@ -791,6 +824,27 @@
           }
         },
 
+        checkAdminAccess() {
+          if (this.isAdminAuthenticated) {
+            this.activeTab = 'admin';
+          } else {
+            this.enteredPassword = '';
+            this.showPasswordModal = true;
+          }
+        },
+
+        verifyAdminPassword() {
+          if (this.enteredPassword === this.adminPassword) {
+            this.isAdminAuthenticated = true;
+            this.showPasswordModal = false;
+            this.activeTab = 'admin';
+            this.showNotification('Accesso Amministrativo autorizzato.');
+          } else {
+            this.showNotification('Password errata! Accesso negato.', 'error');
+            this.enteredPassword = '';
+          }
+        },
+
         showNotification(msg, type = 'success') {
           this.toast.message = msg;
           this.toast.type = type;
@@ -819,7 +873,6 @@
             this.loading = false;
             this.showNotification('Adesione inviata! Codice Voto generato.');
 
-            // Reset Form
             this.form = {
               firstName: '',
               lastName: '',

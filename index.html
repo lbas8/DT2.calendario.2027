@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calendario Aziendale 2027 - Raccolta Adesioni</title>
+  <title>Calendario Aziendale 2027 - Raccolta Adesioni & Contest</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -57,10 +57,10 @@
 
       <!-- Navigation -->
       <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
-        <a href="#progetto" class="text-slate-300 hover:text-white transition">Progetto</a>
-        <a href="#regolamento" class="text-slate-300 hover:text-white transition">Regolamento</a>
-        <a href="#temi" class="text-slate-300 hover:text-white transition">Uffici & Temi</a>
-        <a href="#partecipa" class="text-slate-300 hover:text-white transition">Partecipa</a>
+        <a href="#progetto" @click="activeTab = 'user'" class="text-slate-300 hover:text-white transition">Progetto</a>
+        <a href="#regolamento" @click="activeTab = 'user'" class="text-slate-300 hover:text-white transition">Regolamento</a>
+        <a href="#temi" @click="activeTab = 'user'" class="text-slate-300 hover:text-white transition">Uffici & Soggetti</a>
+        <a href="#partecipa" @click="activeTab = 'user'" class="text-slate-300 hover:text-white transition">Partecipa</a>
       </nav>
 
       <!-- Tab Switcher -->
@@ -70,6 +70,13 @@
                 class="px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5">
           <i class="fa-solid fa-user"></i>
           <span>Portale Dipendenti</span>
+        </button>
+        <button @click="activeTab = 'voting'" 
+                :class="activeTab === 'voting' ? 'bg-brand-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'"
+                class="px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 relative">
+          <i class="fa-solid fa-check-to-slot"></i>
+          <span>Votazioni Contest</span>
+          <span class="bg-amber-500/20 text-amber-400 text-[10px] px-1.5 py-0.2 rounded-full font-bold border border-amber-500/30">In arrivo</span>
         </button>
         <button @click="activeTab = 'admin'" 
                 :class="activeTab === 'admin' ? 'bg-brand-600 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'"
@@ -102,7 +109,7 @@
               Scrivi insieme a noi il <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-500 to-accent-500">Nuovo Anno</span>
             </h1>
             <p class="text-lg sm:text-xl text-slate-300 mb-8 leading-relaxed">
-              Partecipa al Calendario Aziendale 2027! Scopri il soggetto assegnato al tuo ufficio per gli scatti ufficiali presso la Sala Formazione di Arquata Scrivia, prenota la tua copia e partecipa al contest per vincere l'azzeramento del costo!
+              Partecipa al Calendario Aziendale 2027! Scopri il soggetto assegnato al tuo ufficio per gli scatti ufficiali presso la Sala Formazione del Campo Base di Arquata Scrivia, prenota la tua copia e vota per il contest!
             </p>
             <div class="flex flex-wrap gap-4 mb-10">
               <a href="#partecipa" class="bg-gradient-to-r from-accent-500 to-accent-600 text-slate-950 font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-accent-500/25 hover:shadow-accent-500/40 hover:-translate-y-0.5 transition flex items-center space-x-2">
@@ -358,13 +365,57 @@
 
     </div>
 
+    <!-- VISTA VOTAZIONI (LOADING / IN ARRIVO) -->
+    <div x-show="activeTab === 'voting'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-12 text-center max-w-3xl mx-auto shadow-2xl relative overflow-hidden">
+        
+        <div class="w-20 h-20 bg-brand-500/10 border border-brand-500/30 text-brand-400 rounded-3xl flex items-center justify-center mx-auto mb-6 text-3xl shadow-inner relative">
+          <i class="fa-solid fa-spinner fa-spin text-accent-500"></i>
+          <i class="fa-solid fa-lock text-xs absolute -bottom-1 -right-1 bg-slate-800 text-slate-300 p-1.5 rounded-full border border-slate-700"></i>
+        </div>
+
+        <span class="px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full text-xs font-bold uppercase tracking-wider inline-block mb-3">
+          Sessione Fotografica In Corso
+        </span>
+
+        <h2 class="text-3xl font-extrabold text-white mb-3">Le Votazioni Aprirebbero A Breve!</h2>
+        <p class="text-slate-300 text-base leading-relaxed mb-8 max-w-xl mx-auto">
+          La piattaforma di voto per eleggere il <strong class="text-accent-400">"MESE PIÙ SIMPATICO"</strong> sarà attiva subito dopo la conclusione di tutti gli scatti fotografici al Campo Base di Arquata Scrivia (a partire dal <strong>4 Dicembre 2026</strong>).
+        </p>
+
+        <!-- Preview blurred cards -->
+        <div class="relative bg-slate-950/60 p-6 rounded-2xl border border-slate-800/80 mb-8 backdrop-blur-sm">
+          <div class="filter blur-[3px] opacity-40 pointer-events-none grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <template x-for="i in [1,2,3,4,5,6,7,8]" :key="i">
+              <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 text-left">
+                <div class="w-full h-16 bg-slate-700/50 rounded-lg mb-2"></div>
+                <div class="h-3 bg-slate-700 rounded w-3/4 mb-1"></div>
+                <div class="h-2 bg-slate-700/60 rounded w-1/2"></div>
+              </div>
+            </template>
+          </div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/40 rounded-2xl">
+            <span class="text-sm font-bold text-white bg-slate-900/90 px-4 py-2 rounded-xl border border-slate-700 shadow-xl flex items-center space-x-2">
+              <i class="fa-solid fa-camera-retro text-accent-500"></i>
+              <span>Gli scatti si terranno dal 30 Nov al 3 Dic 2026</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/60 border border-slate-700 p-4 rounded-xl text-xs text-slate-400 inline-block">
+          💡 <strong>Promemoria:</strong> Potranno votare solo coloro che avranno prenotato almeno 1 copia del calendario!
+        </div>
+
+      </div>
+    </div>
+
     <!-- DASHBOARD ADMIN -->
     <div x-show="activeTab === 'admin'" x-cloak class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
         <div>
-          <h1 class="text-3xl font-extrabold text-white">Dashboard Amministrativa</h1>
-          <p class="text-slate-400 text-sm">Gestione, consultazione ed esportazione delle registrazioni raccolte.</p>
+          <h1 class="text-3xl font-extrabold text-white">Dashboard Amministrativa & Contest</h1>
+          <p class="text-slate-400 text-sm">Monitoraggio in tempo reale delle adesioni, archivio prenotazioni e statistiche per ufficio.</p>
         </div>
 
         <div class="flex items-center space-x-3">
@@ -379,7 +430,76 @@
         </div>
       </div>
 
-      <!-- Filtri -->
+      <!-- STATISTICHE PER UFFICIO & CONTEST -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+        
+        <!-- Tabella Conteggio Uffici -->
+        <div class="lg:col-span-2 bg-slate-800/80 border border-slate-700 rounded-2xl p-6 shadow-xl">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+              <i class="fa-solid fa-chart-bar text-brand-500"></i>
+              <span>Partecipazioni e Copie per Ufficio</span>
+            </h3>
+            <span class="text-xs bg-slate-700 text-slate-300 px-2.5 py-1 rounded-full font-semibold" x-text="submissions.length + ' Totale Iscritti'"></span>
+          </div>
+          
+          <div class="overflow-x-auto max-h-72 overflow-y-auto">
+            <table class="w-full text-left text-sm text-slate-300">
+              <thead class="bg-slate-900 text-xs text-slate-400 uppercase tracking-wider sticky top-0">
+                <tr>
+                  <th class="py-2.5 px-3">Ufficio / Reparto</th>
+                  <th class="py-2.5 px-3 text-center">Iscritti</th>
+                  <th class="py-2.5 px-3 text-center">Copie prenotate</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-700/50">
+                <template x-for="dept in departments" :key="dept">
+                  <tr class="hover:bg-slate-700/20">
+                    <td class="py-2.5 px-3 font-medium text-white" x-text="dept"></td>
+                    <td class="py-2.5 px-3 text-center font-bold text-brand-400" x-text="getOfficeStats(dept).count"></td>
+                    <td class="py-2.5 px-3 text-center font-bold text-accent-400" x-text="getOfficeStats(dept).copies"></td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Box Podio Contest Live -->
+        <div class="bg-gradient-to-br from-slate-800 to-brand-900/50 border border-accent-500/40 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-accent-500 uppercase tracking-wider">🏆 Leaderboard Contest</span>
+              <i class="fa-solid fa-trophy text-accent-500 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Stato Attuale Uffici</h3>
+            <p class="text-xs text-slate-300 mb-4">Ecco la classifica provvisoria degli uffici con più partecipanti iscritti all'iniziativa:</p>
+
+            <div class="space-y-3">
+              <template x-for="(item, index) in contestLeaderboard.slice(0, 3)" :key="item.dept">
+                <div class="bg-slate-900/80 border border-slate-700/70 p-3 rounded-xl flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                    <span :class="{
+                      'bg-amber-500 text-slate-950': index === 0,
+                      'bg-slate-400 text-slate-950': index === 1,
+                      'bg-amber-700 text-white': index === 2
+                    }" class="w-6 h-6 rounded-full font-black text-xs flex items-center justify-center" x-text="index + 1"></span>
+                    <span class="text-xs font-bold text-white truncate max-w-[140px]" x-text="item.dept"></span>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-400" x-text="item.count + ' iscritti'"></span>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-700/60 text-[11px] text-slate-400 text-center">
+            Il vincitore finale sarà decretato dai voti ufficiali al contest!
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Filtri Tabella -->
       <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
           <input type="text" x-model="adminSearch" placeholder="Cerca per nome, cognome o email..." 
@@ -403,7 +523,7 @@
         </div>
       </div>
 
-      <!-- TABELLA DATI -->
+      <!-- TABELLA DATI ARCHIVIO -->
       <div class="bg-slate-800/80 border border-slate-700 rounded-2xl overflow-hidden shadow-xl">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm text-slate-300">
@@ -585,6 +705,29 @@
               notes: ''
             };
           }, 600);
+        },
+
+        getOfficeStats(dept) {
+          let count = 0;
+          let copies = 0;
+          this.submissions.forEach(sub => {
+            if (sub.office === dept) {
+              count++;
+              if (sub.participationType !== 'Solo Foto') {
+                copies += parseInt(sub.copies || 0);
+              }
+            }
+          });
+          return { count, copies };
+        },
+
+        get contestLeaderboard() {
+          return this.departments.map(dept => {
+            return {
+              dept: dept,
+              count: this.submissions.filter(sub => sub.office === dept).length
+            };
+          }).sort((a, b) => b.count - a.count);
         },
 
         get filteredSubmissions() {

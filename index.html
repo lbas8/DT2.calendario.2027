@@ -11,10 +11,6 @@
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
   <script>
     tailwind.config = {
@@ -40,11 +36,6 @@
   </script>
   <style>
     [x-cloak] { display: none !important; }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between"
@@ -111,7 +102,7 @@
               Scrivi insieme a noi il <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-500 to-accent-500">Nuovo Anno</span>
             </h1>
             <p class="text-lg sm:text-xl text-slate-300 mb-8 leading-relaxed">
-              Partecipa al Calendario Aziendale 2027! Rappresenta il tuo ufficio negli scatti fotografici ufficiali presso la Sala Formazione di Arquata Scrivia, prenota la tua copia e partecipa al contest per vincere l'azzeramento del costo!
+              Partecipa al Calendario Aziendale 2027! Scopri il soggetto assegnato al tuo ufficio per gli scatti ufficiali presso la Sala Formazione di Arquata Scrivia, prenota la tua copia e partecipa al contest per vincere l'azzeramento del costo!
             </p>
             <div class="flex flex-wrap gap-4 mb-10">
               <a href="#partecipa" class="bg-gradient-to-r from-accent-500 to-accent-600 text-slate-950 font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-accent-500/25 hover:shadow-accent-500/40 hover:-translate-y-0.5 transition flex items-center space-x-2">
@@ -124,23 +115,23 @@
               </a>
               <a href="#temi" class="bg-slate-800/60 text-slate-300 border border-slate-700/60 hover:bg-slate-800 font-medium px-6 py-3.5 rounded-xl transition flex items-center space-x-2">
                 <i class="fa-solid fa-building"></i>
-                <span>Uffici & Temi 2027</span>
+                <span>Calendario Uffici & Soggetti</span>
               </a>
             </div>
 
             <!-- Stats Bar -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-800">
               <div>
-                <span class="block text-2xl font-black text-white">12</span>
-                <span class="text-xs text-slate-400">Mesi & Temi Ufficio</span>
+                <span class="block text-2xl font-black text-white">12 Mesi + Copertina</span>
+                <span class="text-xs text-slate-400">Pianificazione Uffici</span>
               </div>
               <div>
                 <span class="block text-2xl font-black text-accent-500">5 €</span>
                 <span class="text-xs text-slate-400">Costo Indicativo Copia</span>
               </div>
               <div>
-                <span class="block text-2xl font-black text-brand-500">Arquata S.</span>
-                <span class="text-xs text-slate-400">Set Foto Campo Base</span>
+                <span class="block text-2xl font-black text-brand-500">30 Nov - 3 Dic</span>
+                <span class="text-xs text-slate-400">Sessioni Foto Campo Base</span>
               </div>
               <div>
                 <span class="block text-2xl font-black text-emerald-400" x-text="submissions.length">0</span>
@@ -161,15 +152,14 @@
           </div>
 
           <div class="grid md:grid-cols-2 gap-8">
-            <!-- Card 1 & 2 -->
             <div class="space-y-6">
               <div class="bg-slate-800/70 border border-slate-700/80 rounded-2xl p-6">
                 <div class="flex items-center space-x-3 mb-3">
                   <div class="w-8 h-8 rounded-lg bg-brand-500/20 text-brand-500 flex items-center justify-center font-bold">1</div>
-                  <h3 class="text-lg font-bold text-white">🏢 Gli Uffici & I Temi Mensili</h3>
+                  <h3 class="text-lg font-bold text-white">🏢 Gli Uffici & I Soggetti Mensili</h3>
                 </div>
                 <p class="text-slate-300 text-sm leading-relaxed">
-                  Ogni ufficio è abbinato a un mese e a un tema specifico. Il vostro team rappresenterà quel mese ed è chiamato a interpretarlo con creatività, spirito di squadra e autoironia!
+                  Ogni ufficio è abbinato a un mese e a un soggetto specifico. Il vostro team rappresenterà quel tema ed è chiamato a interpretarlo con creatività, spirito di squadra e autoironia!
                 </p>
               </div>
 
@@ -179,7 +169,7 @@
                   <h3 class="text-lg font-bold text-white">📸 Set Fotografico Ad Arquata Scrivia</h3>
                 </div>
                 <p class="text-slate-300 text-sm leading-relaxed">
-                  Le foto si terranno presso la <strong>Sala Formazione del Campo Base di Arquata Scrivia</strong>. Il calendario dettagliato con i giorni e gli orari riservati a ciascun ufficio verrà pubblicato a breve su questo portale. Presentatevi carichi e puntuali!
+                  Le foto si terranno dal <strong>30 novembre al 3 dicembre 2026</strong> presso la <strong>Sala Formazione del Campo Base di Arquata Scrivia</strong>, secondo il calendario ufficiale riportato sul portale. Presentatevi puntuali e carichi!
                 </p>
               </div>
 
@@ -248,23 +238,25 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center max-w-3xl mx-auto mb-12">
             <span class="text-brand-500 font-bold text-xs uppercase tracking-wider">Pianificazione 2027</span>
-            <h2 class="text-3xl font-extrabold text-white mt-1">Uffici e Temi dei 12 Mesi</h2>
-            <p class="text-slate-400 mt-2">Scopri l'abbinamento tra uffici aziendali e mesi del calendario.</p>
+            <h2 class="text-3xl font-extrabold text-white mt-1">Uffici, Soggetti e Date Foto</h2>
+            <p class="text-slate-400 mt-2">Il calendario ufficiale delle sessioni fotografiche presso il Campo Base di Arquata Scrivia.</p>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <template x-for="month in months" :key="month.id">
-              <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-5 hover:border-brand-500/50 hover:bg-slate-800 transition group">
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-xs font-bold text-brand-500 uppercase tracking-widest" x-text="month.name"></span>
-                  <span class="w-8 h-8 rounded-lg bg-slate-700/50 group-hover:bg-brand-500/20 text-slate-300 group-hover:text-brand-500 flex items-center justify-center transition">
-                    <i :class="month.icon"></i>
-                  </span>
+              <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-5 hover:border-brand-500/50 hover:bg-slate-800 transition group flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-bold text-brand-500 uppercase tracking-widest" x-text="month.name"></span>
+                    <span class="w-8 h-8 rounded-lg bg-slate-700/50 group-hover:bg-brand-500/20 text-slate-300 group-hover:text-brand-500 flex items-center justify-center transition">
+                      <i :class="month.icon"></i>
+                    </span>
+                  </div>
+                  <h3 class="text-base font-bold text-white mb-1" x-text="'Soggetto: ' + month.subject"></h3>
+                  <p class="text-xs text-slate-300 font-medium mb-3" x-text="'Ufficio: ' + month.office"></p>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-1" x-text="month.theme"></h3>
-                <div class="mt-3 pt-3 border-t border-slate-700/50 flex items-center justify-between">
-                  <span class="text-xs text-slate-400">Ufficio:</span>
-                  <span class="text-xs font-semibold bg-slate-700 text-slate-200 px-2 py-1 rounded" x-text="month.office"></span>
+                <div class="pt-3 border-t border-slate-700/50 flex items-center justify-between text-[11px] text-accent-400 font-semibold">
+                  <span><i class="fa-solid fa-calendar-day mr-1"></i> <span x-text="month.date"></span></span>
                 </div>
               </div>
             </template>
@@ -471,7 +463,7 @@
   <footer class="bg-slate-950 border-t border-slate-800 py-8 text-center text-xs text-slate-500">
     <div class="max-w-7xl mx-auto px-4">
       <p>Calendario Aziendale 2027 • Coordinamento Iniziative Interne</p>
-      <p class="mt-1">Set Fotografico: Sala Formazione - Campo Base di Arquata Scrivia</p>
+      <p class="mt-1">Set Fotografico: Sala Formazione - Campo Base di Arquata Scrivia (30 Nov - 3 Dic 2026)</p>
     </div>
   </footer>
 
@@ -500,29 +492,35 @@
         adminFilterType: '',
         
         departments: [
-          'Amministrazione & Finance',
-          'Risorse Umane (HR)',
-          'Ufficio Tecnico & Progettazione',
-          'Qualità, Sicurezza & Ambiente (QHSE)',
-          'Acquisti & Logistics',
-          'Commerciale & Marketing',
-          'Sistemi Informativi (IT)',
-          'Produzione & Operazioni'
+          'Ambiente',
+          'DCP5',
+          'Capo Campo e Struttura',
+          'Sicurezza',
+          'Topografia/Monitoraggio + lemmi',
+          'Magazzino/TIM+Danilo',
+          'DCP3',
+          'DCP4/DCP2/DCL2',
+          'Amministrazione',
+          'Contabilità',
+          'Qualità',
+          'Cost Control/Planner/Direzione',
+          'Copertina (DT2)'
         ],
 
         months: [
-          { id: 1, name: 'Gennaio 2027', theme: 'Nuovi Inizi & Visione', office: 'Direzione & Strategy', icon: 'fa-solid fa-compass' },
-          { id: 2, name: 'Febbraio 2027', theme: 'Passione & Teamwork', office: 'Risorse Umane (HR)', icon: 'fa-solid fa-heart' },
-          { id: 3, name: 'Marzo 2027', theme: 'Innovazione & Idee', office: 'Ufficio Tecnico & Progettazione', icon: 'fa-solid fa-lightbulb' },
-          { id: 4, name: 'Aprile 2027', theme: 'Sostenibilità Green', office: 'Qualità, Sicurezza & Ambiente', icon: 'fa-solid fa-leaf' },
-          { id: 5, name: 'Maggio 2027', theme: 'Energia & Crescita', office: 'Commerciale & Marketing', icon: 'fa-solid fa-chart-line' },
-          { id: 6, name: 'Giugno 2027', theme: 'Connessione & Digital', office: 'Sistemi Informativi (IT)', icon: 'fa-solid fa-network-wired' },
-          { id: 7, name: 'Luglio 2027', theme: 'Precisione & Calcolo', office: 'Amministrazione & Finance', icon: 'fa-solid fa-calculator' },
-          { id: 8, name: 'Agosto 2027', theme: 'Relax & Benessere', office: 'Servizi Generali', icon: 'fa-solid fa-sun' },
-          { id: 9, name: 'Settembre 2027', theme: 'Pianificazione & Flussi', office: 'Acquisti & Logistics', icon: 'fa-solid fa-boxes-stacked' },
-          { id: 10, name: 'Ottobre 2027', theme: 'Qualità & Standard', office: 'Laboratorio & Controllo Qualità', icon: 'fa-solid fa-vial' },
-          { id: 11, name: 'Novembre 2027', theme: 'Produzione & Forza', office: 'Produzione & Operazioni', icon: 'fa-solid fa-industry' },
-          { id: 12, name: 'Dicembre 2027', theme: 'Celebrazione & Traguardi', office: 'Tutti gli Uffici (Foto Finale)', icon: 'fa-solid fa-champagne-glasses' }
+          { id: 1, name: 'Gennaio', subject: 'Neve', office: 'Ambiente', date: 'lunedì 30 novembre 2026', icon: 'fa-solid fa-snowflake' },
+          { id: 2, name: 'Febbraio', subject: 'Carnevale', office: 'DCP5', date: 'lunedì 30 novembre 2026', icon: 'fa-solid fa-masks-theater' },
+          { id: 3, name: 'Marzo', subject: 'Primavera', office: 'Capo Campo e Struttura', date: 'lunedì 30 novembre 2026', icon: 'fa-solid fa-seedling' },
+          { id: 4, name: 'Aprile', subject: 'Pasqua', office: 'Sicurezza', date: 'lunedì 30 novembre 2026', icon: 'fa-solid fa-shield' },
+          { id: 5, name: 'Maggio', subject: 'Grigliate', office: 'Topografia/Monitoraggio + lemmi', date: 'martedì 1 dicembre 2026', icon: 'fa-solid fa-fire-burner' },
+          { id: 6, name: 'Giugno', subject: 'Primo Bagnetto', office: 'Magazzino/TIM+Danilo', date: 'martedì 1 dicembre 2026', icon: 'fa-solid fa-water' },
+          { id: 7, name: 'Luglio', subject: 'Campeggio', office: 'DCP3', date: 'martedì 1 dicembre 2026', icon: 'fa-solid fa-campground' },
+          { id: 8, name: 'Agosto', subject: 'Spiaggia', office: 'DCP4/DCP2/DCL2', date: 'martedì 1 dicembre 2026', icon: 'fa-solid fa-umbrella-beach' },
+          { id: 9, name: 'Settembre', subject: 'Rientro', office: 'Amministrazione', date: 'mercoledì 2 dicembre 2026', icon: 'fa-solid fa-briefcase' },
+          { id: 10, name: 'Ottobre', subject: 'Halloween/Castagne', office: 'Contabilità', date: 'mercoledì 2 dicembre 2026', icon: 'fa-solid fa-ghost' },
+          { id: 11, name: 'Novembre', subject: 'Primi Freddi', office: 'Qualità', date: 'mercoledì 2 dicembre 2026', icon: 'fa-solid fa-mug-hot' },
+          { id: 12, name: 'Dicembre', subject: 'Cenone di Natale/Regali/Presepe', office: 'Cost Control/Planner/Direzione', date: 'mercoledì 2 dicembre 2026', icon: 'fa-solid fa-gift' },
+          { id: 13, name: 'Speciale', subject: "Libero / Ognuno quello dell'ufficio", office: 'Copertina (DT2)', date: 'giovedì 3 dicembre 2026', icon: 'fa-solid fa-star' }
         ],
 
         form: {
